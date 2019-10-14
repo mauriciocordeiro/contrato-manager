@@ -1,0 +1,22 @@
+/contrato-manager
+	/_docs
+	/src
+		/app
+			/components
+				/contrato
+				/empresa
+			/controllers
+				contrato.ts
+				contrato.service.ts
+				empresa.ts
+				empresa.service.ts
+	/server
+		/database
+			db.js
+		/routes
+			contrato.route.js
+			empresa.route.js
+		/model
+			Contrato.js
+			Empresa.js
+			
