@@ -1,15 +1,19 @@
 /contrato-manager
-	/_docs
+	/docs
 	/src
 		/app
 			/components
 				/contrato
 				/empresa
 			/controllers
-				contrato.ts
-				contrato.service.ts
-				empresa.ts
-				empresa.service.ts
+				/contrato
+					contrato.ts
+					contrato.service.ts
+					contrato.interface.ts
+				/empresa
+					empresa.ts
+					empresa.service.ts
+					empresa.interface.ts
 	/server
 		/database
 			db.js

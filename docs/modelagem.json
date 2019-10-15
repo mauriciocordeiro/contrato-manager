@@ -1,0 +1,157 @@
+Empresa: {
+	cnpj: string,
+	razao_social:string,
+	nome_fantasia:string,
+	email:string,
+	rua:string,
+	num:int,
+	bairro:string,
+	cidade:string,
+	uf:string,
+	telefones:[{
+		telefone:string
+	}],
+	contratos:[{
+		_id:ObjectId,
+		tipo_contrato:{
+			_id:ObjectId,
+			tipo_contrato:string
+		},
+		status_contrato:{
+			_id:ObjectId,
+			status_contrato:string
+		},
+		valor_contrato:decimal,
+		usuario:{
+			_id:ObjectId,
+			nome_usuario:string
+		},
+		aditivo:[{
+			_id:ObjectId
+			valor_contrato_aditivo:decimal,
+			data_vencimento_aditivo:date
+		}]
+		
+	}]
+}
+
+
+Contrato: {
+	_id:ObjectId,
+	empresa:{
+		cnpj:string,
+		razao_social:string
+	},
+	copia_contrato:binData,
+	tipo_contrato:{
+		_id:ObjectId,
+		tipo_contrato:string
+	},
+	prestacao:{
+		_id:ObjectId,
+		prestacao:string
+	},
+	status_contrato:{
+		_id:ObjectId,
+		status_contrato:string
+	},
+	valor_contrato:decimal,
+	data_celebracao_contrato:date,
+	data_finalizacao_contrato:date,
+	observacoes_contrato:binData,
+	usuario:{
+		_id:ObjectId,
+		nome_usuario:string
+	},
+	aditivo:[{
+		_id:ObjectId
+		copia_contrato_aditivo:binData,
+		valor_contrato_aditivo:decimal,
+		data_renovacao_aditivo:date,
+		data_vencimento_aditivo:date,
+		observacoes_aditivo:binData
+	}],
+	conta: [{
+		_id:ObjectId,
+		tipo_conta:{
+			_id:ObjectId,
+			tipo_conta:string
+		},
+		status_conta:{
+			_id:ObjectId,
+			status_conta:string
+		},
+		valor_conta:decimal,
+		valor_pago:decimal
+	}]
+}
+
+TipoContrato: {
+	_id:ObjectId,
+	tipo_contrato:string
+}
+
+StatusContrato: {
+	_id:ObjectId,
+	status_contrato:string
+}
+
+Prestacao: {
+	_id:ObjectId,
+	prestacao:string
+}
+
+TipoConta: {
+	_id:ObjectId,
+	tipo_conta:string
+}
+
+StatusConta: {
+	_id:ObjectId,
+	status_conta:string
+}
+
+Conta:{
+	_id:ObjectId,
+	_idContrato:ObjectId,
+	empresa:{
+		_id:ObjectId,
+		nome_fantasia:string
+	},
+	copia_conta:binData,
+	tipo_conta:{
+		_id:ObjectId,
+		tipo_conta:string
+	},
+	status_conta:{
+		_id:ObjectId,
+		status_conta:string
+	},
+	data_vencimento_conta:date,
+	data_recebimento_setor:date,
+	data_envio_dof:date,
+	data_pagamento_conta:date,
+	valor_conta:decimal,
+	valor_pago:decimal,
+	observacoes_conta:binData,
+	usuario:{
+		_id:ObjectId,
+		nome_usuario:string
+	}
+}
+
+Usuario:{
+	_id:ObjectId,
+	nome_usuario:string,
+	login_usuario:string,
+	senha_usuario:string,
+	tipo_setor:{
+		_id:ObjectId,
+		tipo_setor:string,
+	}
+}
+
+TipoSetor:{
+	_id:ObjectId,
+	tipo_setor:string
+}
