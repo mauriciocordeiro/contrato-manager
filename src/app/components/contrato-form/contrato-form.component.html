@@ -1,0 +1,70 @@
+<mat-card>
+  <mat-card-header class="header w-100 form-line">
+      <mat-card-title class="form-title w-50">Contrato</mat-card-title>
+      <!-- <mat-form-field class="w-50">
+        <input matInput placeholder="Buscar Contrato">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field> -->
+  </mat-card-header>
+  <hr>
+  <mat-card-content>
+    <form [formGroup]="contratoForm" (ngSubmit)="submit()">
+      <div class="form-line">
+        <mat-form-field class="form-field w-50">
+          <mat-label>Empresa</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let item of empresas" [value]="item.cnpj">
+              {{item.nome_fantasia}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-field w-25">
+          <mat-label>Tipo de Contrato</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let item of tipoContrato" [value]="item._id">
+              {{item.tipo_contrato}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-field w-25">
+          <mat-label>Prestação</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let item of prestacao" [value]="item._id">
+              {{item.prestacao}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-line">
+        <mat-form-field class="form-field w-25">
+          <mat-label>Status</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let item of statusContrato" [value]="item._id">
+              {{item.status_contrato}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-field w-10">
+          <mat-label>Celebração</mat-label>
+          <input matInput [matDatepicker]="dtCelebracao">
+          <mat-datepicker-toggle matSuffix [for]="dtCelebracao"></mat-datepicker-toggle>
+          <mat-datepicker #dtCelebracao></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="form-field w-10">
+          <mat-label>Finalização</mat-label>
+          <input matInput [matDatepicker]="dtFinalizacao">
+          <mat-datepicker-toggle matSuffix [for]="dtFinalizacao"></mat-datepicker-toggle>
+          <mat-datepicker #dtFinalizacao></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+    </form>
+  </mat-card-content>
+  <hr>
+  <mat-card-actions class="form-action">
+    <button mat-button color="primary" type="button">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit">
+      <mat-icon>save</mat-icon> Salvar
+    </button>
+  </mat-card-actions>
+</mat-card>
