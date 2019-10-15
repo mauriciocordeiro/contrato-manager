@@ -1,24 +1,23 @@
-import { EmpresaInterface } from '../empresa/empresa.interface';
-import { TipoContratoInterface } from '../tipo-contrato/tipo-contrato.interface';
-import { PrestacaoInterface } from '../prestacao/prestacao.interface';
-import { StatusContratoInterface } from '../status-contrato/status-contrato.interface';
-import { UsuarioInterface } from '../usuario/usuaio.interface';
+import { StatusContrato } from '../status-contrato/status-contrato';
+import { Usuario } from '../usuario/usuaio';
 import { Aditivo } from '../aditivo/aditivo';
-import { ContaInterface } from '../conta/conta.interface';
+import { Conta } from '../conta/conta';
+import { Empresa } from '../empresa/empresa';
+import { TipoContrato } from '../tipo-contrato/tipo-contrato';
+import { Prestacao } from '../prestacao/prestacao';
 
 export class Contrato {
     _id: String;
-    empresa: EmpresaInterface;
+    empresa: Empresa;
     copia_contrato: any;
-    tipo_contrato: TipoContratoInterface;
-    prestacao: PrestacaoInterface;
-    status_contrato: StatusContratoInterface;
+    tipo_contrato: TipoContrato;
+    prestacao: Prestacao;
+    status_contrato: StatusContrato;
     valor_contrato: Number;
     data_celebracao_contrato: Date;
     data_finalizacao_contrato: Date;
     observacoes_contrato: String;
-    usuario: UsuarioInterface;
+    usuario: Usuario;
     aditivo: Array<Aditivo>;
-    conta: Array<ContaInterface>;
-
+    conta: Array<Conta>;
 }

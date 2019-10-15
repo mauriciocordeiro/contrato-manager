@@ -9,11 +9,9 @@
 				/contrato
 					contrato.ts
 					contrato.service.ts
-					contrato.interface.ts
 				/empresa
 					empresa.ts
 					empresa.service.ts
-					empresa.interface.ts
 	/server
 		/database
 			db.js
