@@ -11,6 +11,6 @@ export class Empresa {
 	bairro: String;
 	cidade: String;
     uf: String;
-    telefones: Array<String>;
-    contratos: Array<Contrato>
+    telefones: String[];
+    contratos: Contrato[]
 }

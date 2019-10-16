@@ -1,7 +1,7 @@
 import { Empresa } from '../empresa/empresa';
 import { TipoConta } from '../tipo-conta/tipo-conta';
 import { StatusConta } from '../status-conta/status-conta';
-import { Usuario } from '../usuario/usuaio';
+import { Usuario } from '../usuario/usuario';
 
 export class Conta {
     _id: String;
