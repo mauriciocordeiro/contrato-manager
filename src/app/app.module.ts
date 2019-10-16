@@ -9,13 +9,15 @@ import { ContratoFormComponent } from './components/contrato-form/contrato-form.
 import { ContaComponent } from './components/conta/conta.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContratoComponent } from './components/contrato/contrato.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContratoFormComponent,
     ContaComponent,
-    ContratoComponent
+    ContratoComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

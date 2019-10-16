@@ -44,7 +44,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 // copied
-.header{
+.header {
+    position: sticky;
+    position: -webkit-sticky;
+    top:0;
+    z-index:1000;    
     justify-content:space-between;
 }
 
@@ -104,12 +108,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color:#F2F2F2;
     width:250px;
 }
- .header{
-    position:sticky;
-    position:-webkit-sticky;
-    top:0;
-    z-index:1000;
-}
+
  mat-sidenav mat-icon{
     margin-right:12px;
 }
