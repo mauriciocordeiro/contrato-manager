@@ -3,93 +3,103 @@
 
 
 
-CREATE TABLE Usuario (
-id_usuario VARCHAR(10) PRIMARY KEY,
-login VARCHAR(10),
-senha VARCHAR(10),
-nome VARCHAR(10)
-)
-
 CREATE TABLE Setor (
-id_setor VARCHAR(10) PRIMARY KEY,
-nome VARCHAR(10),
-id_usuario VARCHAR(10),
-FOREIGN KEY(id_usuario) REFERENCES Usuario (id_usuario)
+id_setor INTEGER PRIMARY KEY,
+nome VARCHAR(50)
 )
 
-CREATE TABLE Contrato (
-id_contrato VARCHAR(10) PRIMARY KEY,
-copia_contrato VARCHAR(10),
-observacoes VARCHAR(10),
-prestacao VARCHAR(10),
-tipo_contrato VARCHAR(10),
-status_contrato VARCHAR(10),
-data_finalizacao VARCHAR(10),
-data_celebracao VARCHAR(10),
-valor_contrato VARCHAR(10),
-numero VARCHAR(10),
-id_empresa VARCHAR(10)
-)
-
-CREATE TABLE Conta (
-id_conta VARCHAR(10) PRIMARY KEY,
-copia_conta VARCHAR(10),
-valor_conta VARCHAR(10),
-data_vencimento VARCHAR(10),
-data_recebimento_setor VARCHAR(10),
-data_envio_dof VARCHAR(10),
-observacoes VARCHAR(10),
-tipo_conta VARCHAR(10),
-status_conta VARCHAR(10),
-id_contrato VARCHAR(10),
-FOREIGN KEY(id_contrato) REFERENCES Contrato (id_contrato)
+CREATE TABLE Usuario (
+id_usuario INTEGER PRIMARY KEY,
+id_setor INTEGER,
+senha VARCHAR(20),
+nome VARCHAR(50),
+login VARCHAR(20),
+FOREIGN KEY(id_setor) REFERENCES Setor (id_setor)
 )
 
 CREATE TABLE Aditivo (
-id_aditivo VARCHAR(10) PRIMARY KEY,
-observacoes VARCHAR(10),
-data_renovacao VARCHAR(10),
-valor_contrato_aditivo VARCHAR(10),
-data_vencimento VARCHAR(10),
-copia_contrato_aditivo VARCHAR(10),
-id_contrato VARCHAR(10),
-FOREIGN KEY(id_contrato) REFERENCES Contrato (id_contrato)
+id_aditivo INTEGER,
+id_contrato INTEGER,
+id_empresa INTEGER,
+copia_contrato_aditivo VARCHAR(100),
+valor_contrato_aditivo DECIMAL(2),
+observacoes VARCHAR(500),
+data_renovacao DATETIME,
+data_vencimento DATETIME,
+PRIMARY KEY(id_aditivo,id_contrato,id_empresa)
 )
 
 CREATE TABLE Empresa (
-id_empresa VARCHAR(10) PRIMARY KEY,
-cnpj VARCHAR(10),
-razao_social VARCHAR(10),
-email VARCHAR(10),
-nome_fantasia VARCHAR(10)
-)
-
-CREATE TABLE Endereco (
-id_endereco VARCHAR(10) PRIMARY KEY,
-numero VARCHAR(10),
-rua VARCHAR(10),
-bairro VARCHAR(10),
-cidade VARCHAR(10),
-uf VARCHAR(10),
-id_empresa VARCHAR(10),
-FOREIGN KEY(id_empresa) REFERENCES Empresa (id_empresa)
+id_empresa INTEGER PRIMARY KEY,
+cnpj VARCHAR(14),
+razao_social VARCHAR(50),
+email VARCHAR(50),
+nome_fantasia VARCHAR(50)
 )
 
 CREATE TABLE Telefone (
-id_telefone VARCHAR(10) PRIMARY KEY,
-numero VARCHAR(10),
-ddd VARCHAR(10),
-id_empresa VARCHAR(10),
+id_telefone INTEGER,
+id_empresa INTEGER,
+numero VARCHAR(15),
+ddd VARCHAR(2),
+PRIMARY KEY(id_telefone,id_empresa),
 FOREIGN KEY(id_empresa) REFERENCES Empresa (id_empresa)
 )
 
-CREATE TABLE Pagamento (
-data_pagamento_conta VARCHAR(10),
-valor_pago VARCHAR(10),
-taxa_juros VARCHAR(10),
-id_pagamento VARCHAR(10) PRIMARY KEY,
-id_conta VARCHAR(10),
-FOREIGN KEY(id_conta) REFERENCES Conta (id_conta)
+CREATE TABLE Endereco (
+id_endereco INTEGER,
+id_empresa INTEGER,
+numero VARCHAR(50),
+rua VARCHAR(50),
+bairro VARCHAR(50),
+cidade VARCHAR(50),
+uf VARCHAR(2),
+PRIMARY KEY(id_endereco,id_empresa),
+FOREIGN KEY(id_empresa) REFERENCES Empresa (id_empresa)
 )
 
-ALTER TABLE Contrato ADD FOREIGN KEY(id_empresa) REFERENCES Empresa (id_empresa)
+CREATE TABLE Contrato (
+id_contrato INTEGER,
+id_empresa INTEGER,
+copia_contrato VARCHAR(100),
+data_finalizacao DATETIME,
+data_celebracao DATETIME,
+valor_contrato DECIMAL(2),
+prestacao INTEGER,
+tipo_contrato INTEGER,
+status_contrato INTEGER,
+numero VARCHAR(50),
+observacoes VARCHAR(500),
+PRIMARY KEY(id_contrato,id_empresa),
+FOREIGN KEY(id_empresa) REFERENCES Empresa (id_empresa)
+)
+
+CREATE TABLE Conta (
+id_conta INTEGER,
+id_contrato INTEGER,
+id_empresa INTEGER,
+copia_conta VARCHAR(100),
+status_conta INTEGER,
+observacoes VARCHAR(500),
+data_envio_dof DATETIME,
+data_vencimento DATETIME,
+data_recebimento_setor DATETIME,
+valor_conta DECIMAL(2),
+tipo_conta INTEGER,
+PRIMARY KEY(id_conta,id_contrato,id_empresa),
+FOREIGN KEY(id_contrato, id_empresa) REFERENCES Contrato (id_contrato,id_empresa)
+)
+
+CREATE TABLE Pagamento (
+id_pagamento VARCHAR(50),
+id_conta INTEGER,
+id_contrato INTEGER,
+id_empresa INTEGER,
+valor_pago VARCHAR(50),
+taxa_juros DECIMAL(2),
+data_pagamento_conta DATETIME,
+PRIMARY KEY(id_pagamento,id_conta,id_contrato,id_empresa),
+FOREIGN KEY(id_conta, id_contrato, id_empresa) REFERENCES Conta (id_conta,id_contrato,id_empresa)
+)
+
+ALTER TABLE Aditivo ADD FOREIGN KEY(id_contrato, id_empresa) REFERENCES Contrato (id_contrato,id_empresa)
