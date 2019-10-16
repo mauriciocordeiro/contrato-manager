@@ -1,37 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { DataFake } from 'src/app/controllers/utils/data.fake';
-import { Empresa } from 'src/app/controllers/empresa/empresa';
-import { TipoContrato } from 'src/app/controllers/tipo-contrato/tipo-contrato';
-import { Prestacao } from 'src/app/controllers/prestacao/prestacao';
-import { StatusContrato } from 'src/app/controllers/status-contrato/status-contrato';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { FakeData } from 'src/app/utils/fake.data';
+import { Contrato } from 'src/app/controllers/contrato';
+import { ContratoServices } from 'src/app/controllers/contrato.services';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-contrato-form',
-  templateUrl: './contrato-form.component.html',
-  styleUrls: ['./contrato-form.component.scss']
+	selector: 'app-contrato-form',
+	templateUrl: './contrato-form.component.html',
+	styleUrls: ['./contrato-form.component.scss']
 })
 export class ContratoFormComponent implements OnInit {
 
-  contratoForm: FormGroup = new FormGroup({});
+	// FAKEDATA ==================================================
+	empresas: any[] = FakeData.empresas;
+	tipoContrato: any[] = FakeData.tipoContrato;
+	prestacao: any[] = FakeData.prestacao;
+	statusContrato: any[] = FakeData.statusContrato;
+	// ===========================================================
 
-  // DATAFAKE ==================================================
-  empresas: Empresa[]             = DataFake.empresas;
-  tipoContrato:TipoContrato[]     = DataFake.tipoContrato;
-  prestacao:Prestacao[]           = DataFake.prestacao;
-  statusContrato:StatusContrato[] = DataFake.statusContrato;
-  // ===========================================================
+	constructor( 
+		private router: Router,
+		private services: ContratoServices
+	) { }
 
-  constructor() {
+	ngOnInit() {
 
-  }
+	}
 
-  ngOnInit() {
+	submit() {
+		let contrato:Contrato = new Contrato();
+		contrato.numero = '0000 0001';
+		contrato.status_contrato = 1;
+		contrato.valor_contrato = 1000000.99;
 
-  }
-
-  submit() {
-    alert("SUBMIT")
-  }
+		this.services.create(contrato)
+			.subscribe(result => {
+				alert(result);	
+			});
+	}
 
 }

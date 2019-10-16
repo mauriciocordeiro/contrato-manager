@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,27 +9,33 @@ import { ContratoFormComponent } from './components/contrato-form/contrato-form.
 import { ContaComponent } from './components/conta/conta.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContratoComponent } from './components/contrato/contrato.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
+import { ContratoServices } from './controllers/contrato.services';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ContratoFormComponent,
-    ContaComponent,
-    ContratoComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    AngularMaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+	declarations: [
+		AppComponent,
+		ContratoFormComponent,
+		ContaComponent,
+		ContratoComponent,
+		HomeComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		AngularMaterialModule,
+		FormsModule,
+		ReactiveFormsModule,
+		FlexLayoutModule,
+		HttpClientModule
+	],
+	providers: [
+		ContratoServices,
+		{ provide: LOCALE_ID, useValue: 'pt-BR' }
+	],
+	bootstrap: [AppComponent],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
