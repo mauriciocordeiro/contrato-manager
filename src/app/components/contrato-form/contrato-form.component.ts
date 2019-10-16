@@ -3,6 +3,8 @@ import { FakeData } from 'src/app/utils/fake.data';
 import { Contrato } from 'src/app/controllers/contrato';
 import { ContratoServices } from 'src/app/controllers/contrato.services';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
 	selector: 'app-contrato-form',
@@ -11,32 +13,64 @@ import { Router } from '@angular/router';
 })
 export class ContratoFormComponent implements OnInit {
 
-	// FAKEDATA ==================================================
 	empresas: any[] = FakeData.empresas;
-	tipoContrato: any[] = FakeData.tipoContrato;
-	prestacao: any[] = FakeData.prestacao;
-	statusContrato: any[] = FakeData.statusContrato;
-	// ===========================================================
+
+	tpContrato: any[] = Contrato.tpContrato;
+	prestacao: any[] = Contrato.prestacao;
+	stContrato: any[] = Contrato.stContrato;
+
+
+
+
+	contratoForm:FormGroup;
 
 	constructor( 
+		public formBuilder: FormBuilder,
 		private router: Router,
-		private services: ContratoServices
+		private snackBar: MatSnackBar,
+		private contratoServices: ContratoServices
+		//private empresaServices: EmpresaServices
 	) { }
 
 	ngOnInit() {
+		this.buildForm();
+	}
 
+	buildForm(contrato?:Contrato) {
+		if(!contrato) {
+			contrato = new Contrato();
+		}
+
+		this.contratoForm = this.formBuilder.group({
+			numero: [contrato.numero, [Validators.required]],
+			empresa: [contrato.empresa, [Validators.required]],
+			copia_contrato: [contrato.copia_contrato],
+			tipo_contrato: [contrato.tipo_contrato, [Validators.required]],
+			prestacao: [contrato.prestacao, [Validators.required]],
+			status_contrato: [contrato.status_contrato, [Validators.required]],
+			valor_contrato: [contrato.valor_contrato],
+			data_celebracao_contrato: [contrato.data_celebracao_contrato, [Validators.required]],
+			data_finalizacao_contrato: [contrato.data_finalizacao_contrato],
+			observacoes_contrato: [contrato.data_celebracao_contrato, [Validators.required]],
+			aditivo: [contrato.aditivo],
+			conta: [contrato.conta]
+		});
 	}
 
 	submit() {
-		let contrato:Contrato = new Contrato();
-		contrato.numero = '0000 0001';
-		contrato.status_contrato = 1;
-		contrato.valor_contrato = 1000000.99;
+		if(!this.contratoForm.valid) {
+			alert("Campos inválidos");
+			return;
+		}
 
-		this.services.create(contrato)
-			.subscribe(result => {
-				alert(result);	
+		this.contratoServices.create(this.contratoForm.value)
+			.subscribe( result => {
+				this.snackBar.open('Salvo com sucesso!', 'OK', {
+					duration: 3000,
+					panelClass: ['success-snackbar']
+				  });
 			});
+		
 	}
 
 }

@@ -13,7 +13,7 @@ let Contrato = new Schema (
         valor_contrato: { type: Schema.Types.Decimal128 },
         data_celebracao_contrato: { type: Schema.Types.Date },
         data_finalizacao_contrato: { type: Schema.Types.Date },
-        observacoes_contrato: { type: Schema.Types.Date },
+        observacoes_contrato: { type: Schema.Types.String },
         aditivo: { type: Schema.Types.Array },
         conta: { type: Schema.Types.Array }
     },

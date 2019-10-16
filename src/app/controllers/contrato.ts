@@ -1,4 +1,30 @@
 export class Contrato {
+
+    public static TP_LICITATORIO: Number = 1;
+    public static TP_PERMANENTE: Number = 2;
+    public static TP_CONSULTORIA: Number = 3;
+    public static tpContrato: any[] = [
+        { value: 1, label: 'Licitatório' },
+        { value: 2, label: 'Permanente' },
+        { value: 3, label: 'Consultoria' }
+    ];
+
+    public static ST_ATIVO: Number = 1;
+    public static ST_FINALIZADO: Number = 2;
+    public static ST_CANCELADO: Number = 3;
+    public static stContrato: any[] = [
+        { value: 1, label: 'Ativo' },
+        { value: 2, label: 'Finalizado' },
+        { value: 3, label: 'Cancelado' }
+    ];
+
+    public static SERVICO: Number = 1;
+    public static PRODUTO: Number = 2;
+    public static prestacao: any[] = [
+        { value: 1, label: 'Serviço' },
+        { value: 2, label: 'Produto' }
+    ];
+
     public _id_contrato: String = void(0);
     public numero: String = void(0);
     public empresa: Empresa = void(0);

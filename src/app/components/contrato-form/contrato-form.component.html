@@ -5,57 +5,66 @@
 	<hr>
 	<mat-card-content [formGroup]="contratoForm" (ngSubmit)="submit()" fxLayout="column">
 		<div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
-			<mat-form-field fxFlex="15" class="form-field">
+			<mat-form-field fxFlex="20" class="form-field">
 				<mat-label>Nº</mat-label>
-				<input matInput placeholder="Número do Contrato">
+				<input matInput placeholder="Número do Contrato" formControlName="numero">
 			</mat-form-field>
 			<mat-form-field fxFlex class="form-field">
 				<mat-label>Empresa</mat-label>
-				<mat-select>
-					<mat-option *ngFor="let item of empresas" [value]="item.cnpj">
+				<mat-select  formControlName="empresa">
+					<mat-option *ngFor="let item of empresas" [value]="item">
 						{{item.nome_fantasia}}
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
 			<mat-form-field fxFlex="20" class="form-field">
-				<mat-label>Tipo de Contrato</mat-label>
-				<mat-select>
-					<mat-option *ngFor="let item of tipoContrato" [value]="item._id">
-						{{item.tipo_contrato}}
-					</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<mat-form-field fxFlex="20" class="form-field">
 				<mat-label>Prestação</mat-label>
-				<mat-select>
-					<mat-option *ngFor="let item of prestacao" [value]="item._id">
-						{{item.prestacao}}
+				<mat-select  formControlName="prestacao">
+					<mat-option *ngFor="let item of prestacao" [value]="item.value">
+						{{item.label}}
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
 		</div>
 		<div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
-			<mat-form-field fxFlex="15" class="form-field">
-				<mat-label>Status</mat-label>
-				<mat-select>
-					<mat-option *ngFor="let item of statusContrato" [value]="item._id">
-						{{item.status_contrato}}
+			<mat-form-field fxFlex class="form-field">
+				<mat-label>Tipo de Contrato</mat-label>
+				<mat-select  formControlName="tipo_contrato">
+					<mat-option *ngFor="let item of tpContrato" [value]="item.value">
+						{{item.label}}
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
 			<mat-form-field fxFlex="15" class="form-field">
 				<mat-label>Celebração</mat-label>
-				<input matInput [matDatepicker]="dtCelebracao">
+				<input matInput [matDatepicker]="dtCelebracao" formControlName="data_celebracao_contrato">
 				<mat-datepicker-toggle matSuffix [for]="dtCelebracao"></mat-datepicker-toggle>
 				<mat-datepicker #dtCelebracao></mat-datepicker>
 			</mat-form-field>
+			<mat-form-field fxFlex class="form-field">
+				<mat-label>Status</mat-label>
+				<mat-select formControlName="status_contrato">
+					<mat-option *ngFor="let item of stContrato" [value]="item.value">
+						{{item.label}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
 			<mat-form-field fxFlex="15" class="form-field">
 				<mat-label>Finalização</mat-label>
-				<input matInput [matDatepicker]="dtFinalizacao">
+				<input matInput [matDatepicker]="dtFinalizacao" formControlName="data_finalizacao_contrato">
 				<mat-datepicker-toggle matSuffix [for]="dtFinalizacao"></mat-datepicker-toggle>
 				<mat-datepicker #dtFinalizacao></mat-datepicker>
 			</mat-form-field>
-
+			<mat-form-field fxFlex="15" class="form-field">
+				<mat-label>Valor</mat-label>
+				<input matInput placeholder="Valor do Contrato" formControlName="valor_contrato">
+			</mat-form-field>
+		</div>
+		<div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+			<mat-form-field fxFlex  class="form-field">
+				<mat-label>Observações</mat-label>
+				<textarea matInput placeholder="Observações" formControlName="observacoes_contrato"></textarea>
+			</mat-form-field>
 		</div>
 	</mat-card-content>
 	<hr>
