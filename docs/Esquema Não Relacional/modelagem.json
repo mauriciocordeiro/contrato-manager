@@ -5,7 +5,7 @@ Empresa: {
 	nome_fantasia:string,
 	email:string,
 	endereco:{
-		_idEndereco:ObjectId,
+		_id_endereco:ObjectId,
 		rua:string,
 		numero:int,
 		bairro:string,
@@ -18,12 +18,13 @@ Empresa: {
 		telefone:string
 	}],
 	contratos:[{
-		_id:ObjectId,
+		_id_contrato:ObjectId,
 		tipo_contrato:int,	
 		status_contrato:int,
 		valor_contrato:decimal,
+		numero:string,
 		aditivo:[{
-			_id:ObjectId
+			_id_aditivo:ObjectId
 			valor_contrato_aditivo:decimal,
 			data_vencimento_aditivo:date
 		}]
@@ -49,7 +50,7 @@ Contrato: {
 	data_finalizacao_contrato:date,
 	observacoes_contrato:binData,
 	aditivo:[{
-		_id:ObjectId
+		_id_aditivo:ObjectId
 		copia_contrato_aditivo:binData,
 		valor_contrato_aditivo:decimal,
 		data_renovacao:date,
@@ -57,7 +58,7 @@ Contrato: {
 		observacoes:binData
 	}],
 	conta: [{
-		_id:ObjectId,
+		_id_conta:ObjectId,
 		tipo_conta:int,
 		status_conta:int,
 		valor_conta:decimal
@@ -65,10 +66,10 @@ Contrato: {
 }
 
 Conta:{
-	_id:ObjectId,
-	_idContrato:ObjectId,
+	_id_conta:ObjectId,
+	_id_contrato:ObjectId,
 	empresa:{
-		_id:ObjectId,
+		_id_empresa:ObjectId,
 		nome_fantasia:string
 	},
 	copia_conta:binData,
@@ -87,17 +88,17 @@ Conta:{
 }
 
 Usuario:{
-	_id:ObjectId,
-	nome_usuario:string,
-	login_usuario:string,
-	senha_usuario:string,
+	_id_usuario:ObjectId,
+	nome:string,
+	login:string,
+	senha:string,
 	setor:{
-		_id:ObjectId,
+		_id_setor:ObjectId,
 		nome:string,
 	}
 }
 
 Setor:{
-	_id:ObjectId,
+	_id_setor:ObjectId,
 	nome:string
 }

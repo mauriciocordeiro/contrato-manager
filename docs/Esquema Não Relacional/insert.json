@@ -1,0 +1,303 @@
+db.setor.insert([
+	{	
+		_id: 1, 
+		nome: 'Fiscal'
+	},
+	{	
+		_id: 2, 
+		nome: 'Financeiro'
+	}
+
+]);
+
+db.usuario.insert([
+	{	
+		_id: 1, 
+		nome: 'Cassio', 
+		login: 'cassio', 
+		senha: '12345', 
+		setor:{	
+			_id_setor:1, 
+			nome:'Fiscal'
+		}
+	},
+	{	
+		_id: 2, 
+		nome: 'Ezequiel', 
+		login: 'ezequiel', 
+		senha: '101010', 
+		setor:{
+			_id_setor:2, 
+			nome:'Financeiro'
+		}
+	}
+]);
+
+
+
+db.empresa.insert([
+	{
+		_id: 1, 
+		cnpj: '11111111111111', 
+		razao_social: 'Coelba Limitada', 
+		nome_fantasia: 'Coelba Conquista', 
+		email: 'coelba@provedor.com'
+		endereco:{
+			rua: 'Olivia Flores', 
+			numero: 100, 
+			bairro: 'Candeias', 
+			cidade: 'Vitoria da Conquista', 
+			uf: 'BA'
+		},
+		telefones:[
+			{
+				ddd: '77',
+				telefone: '12345678'
+			},
+			{
+				ddd: '77',
+				telefone: '11111111'
+			}
+		],
+		contratos:[
+			{
+				_id_contrato: 1,
+				tipo_contrato: 'Licitatorio', 
+				status_contrato: 'Ativo', 
+				valor_contrato: 12357.00, 
+				numero: '12345',
+				aditivos:[
+					{
+						_id_aditivo: 1, 
+						valor_contrato_aditivo: 9300.00, 
+						data_vencimento: '2014-12-02'
+					},
+					{
+						_id_aditivo: 2, 
+						valor_contrato_aditivo: 10100.00, 
+						data_vencimento: '2015-12-03'
+					}
+				]
+			}
+		]
+	},
+	{
+		_id: 2, 
+		cnpj: '22222222222222', 
+		razao_social: 'Embasa Limitada', 
+		nome_fantasia: 'Embasa Conquista', 
+		email: 'embasa@provedor.com'
+		endereco:{
+			rua: 'Para', 
+			numero: 200, 
+			bairro: 'Ibirapuera', 
+			cidade: 'Vitoria da Conquista', 
+			uf: 'BA'
+		},
+		telefones:[
+			{
+				ddd: '77',
+				telefone: '22222222'
+			},
+			{
+				ddd: '74',
+				telefone: '568745129'
+			}
+		],
+		contratos:[
+			{
+				_id_contrato: 2,
+				tipo_contrato: 'Licitatorio', 
+				status_contrato: 'Ativo', 
+				valor_contrato: 8570.00, 
+				numero: '45623'
+			}
+		]
+	},
+	{
+		_id: 3, 
+		cnpj: '33333333333333', 
+		razao_social: 'Lanchonete Teixeira', 
+		nome_fantasia: 'Lanchonete Teixeira', 
+		email: 'teixeirao@provedor.com'
+		endereco:{
+			rua: 'Siqueira Campos', 
+			numero: 300, 
+			bairro: 'Centro', 
+			cidade: 'Vitoria da Conquista', 
+			uf: 'BA'
+		},
+		telefones:[
+			{
+				ddd: '73',
+				telefone: '264512598'
+			}
+		],
+		contratos:[
+			{
+				_id_contrato: 3,
+				tipo_contrato: 'Licitatorio', 
+				status_contrato: 'Finalizado', 
+				valor_contrato: 17400.00, 
+				numero: '83452',
+				aditivos:[
+					{
+						_id_aditivo: 1, 
+						valor_contrato_aditivo: 12700.00, 
+						data_vencimento: '2015-11-03'
+					}
+				]
+			},
+			{
+				_id_contrato: 4,
+				tipo_contrato: 'Licitatorio', 
+				status_contrato: 'Finalizado', 
+				valor_contrato: 20530.00, 
+				numero: '83462'
+			}
+		]
+	},
+	{
+		_id: 4, 
+		cnpj: '44444444444444', 
+		razao_social: 'Seguro Alunos RSA', 
+		nome_fantasia: 'Seguro', 
+		email: 'segurorsa@provedor.com'
+		endereco:{
+			rua: 'Nove de Novembro', 
+			numero: 400, 
+			bairro: 'Guarani', 
+			cidade: 'Tapirema', 
+			uf: 'BA'
+		},
+		telefones:[
+			{
+				ddd: '75',
+				telefone: '65217839'
+			}
+		],
+		contratos:[
+			{
+				_id_contrato: 5,
+				tipo_contrato: 'Permanente', 
+				status_contrato: 'Ativo', 
+				valor_contrato: 15900.00, 
+				numero: '23742',
+				aditivos:[
+					{
+						_id_aditivo: 1, 
+						valor_contrato_aditivo: 54890.00, 
+						data_vencimento: '2014-09-23'
+					},
+					{
+						_id_aditivo: 2, 
+						valor_contrato_aditivo: 62340.00, 
+						data_vencimento: '2015-09-25'
+					}
+				]
+			},
+			{
+				_id_contrato: 6,
+				tipo_contrato: 'Licitatorio', 
+				status_contrato: 'Cancelado', 
+				valor_contrato: 13985.00, 
+				numero: '84563'
+			},
+			{
+				_id_contrato: 7,
+				tipo_contrato: 'Permanente', 
+				status_contrato: 'Ativo', 
+				valor_contrato: 21285.00, 
+				numero: '02352'
+			}
+		]
+	}
+]);
+
+db.contrato.insert([
+
+	{
+		_id_contrato: 1,
+		copia_contrato: 'C:\copia100.pdf',
+		tipo_contrato: 'Licitatorio', 
+		prestacao: 'Servico',
+		status_contrato: 'Ativo', 
+		valor_contrato: 12357.00, 
+		data_celebracao: '2013-11-02',
+		data_finalizacao: '2014-11-02'
+		numero: '12345',
+		empresa:[
+			{
+				id_empresa: 1,
+				cnpj: '11111111111111', 
+				razao_social: 'Coelba Limitada'
+				
+			}
+		]
+		aditivos:[
+			{
+				_id_aditivo: 1, 
+				copia_contrato_aditivo: 'C:\copia201.pdf'
+				valor_contrato_aditivo: 9300.00, 
+				data_renovacao: '2013-12-02'
+				data_vencimento: '2014-12-02',
+				observacoes: 'Foi conversado que será oferecido um serviço compo para alunos de baixa renda'
+			},
+			{
+				_id_aditivo: 2, 
+				copia_contrato_aditivo: 'C:\copia201.pdf'
+				valor_contrato_aditivo: 10100.00, 
+				data_renovacao: '2014-12-03'
+				data_vencimento: '2015-12-03'
+			}
+		]
+	},
+	{
+		_id_contrato: 2,
+		copia_contrato: 'C:\copia200.pdf',
+		tipo_contrato: 'Licitatorio', 
+		prestacao: 'Servico',
+		status_contrato: 'Ativo', 
+		valor_contrato: 8570.00, 
+		data_celebracao: '2012-12-01',
+		data_finalizacao: '2013-12-01',
+		observacoes: 'Reclamações por parte dos Alunos do Curso dde BSI no dia  23/10/2014',
+		numero: '45623',
+		empresa:[
+			{
+				id_empresa: 1,
+				cnpj: '22222222222222', 
+				razao_social: 'Embasa Limitada'
+				
+			}
+		]
+	},
+	{
+		_id_contrato: 3,
+		copia_contrato: 'C:\copia50.pdf',
+		tipo_contrato: 'Licitatorio', 
+		prestacao: 'Servico',
+		status_contrato: 'Finalizado', 
+		valor_contrato: 17400.00, 
+		data_celebracao: '2011-05-16',
+		data_finalizacao: '2012-05-06',
+		numero: '83452',
+		aditivos:[
+			{
+				_id_aditivo: 1, 
+				valor_contrato_aditivo: 12700.00, 
+				data_vencimento: '2015-11-03'
+			}
+		]
+	},
+	{
+		_id_contrato: 4,
+		tipo_contrato: 'Licitatorio', 
+		status_contrato: 'Finalizado', 
+		valor_contrato: 20530.00, 
+		numero: '83462'
+	}
+		
+
+]);
+
