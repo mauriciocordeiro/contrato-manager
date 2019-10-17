@@ -78,7 +78,6 @@ export class ContratoFormComponent implements OnInit {
 		setTimeout(_ => {
 			if(this.idContrato) {
 				this.empresas.forEach(element => {
-					debugger
 					if(element._id == contrato.empresa._id_empresa) {
 						this.contratoForm.patchValue({empresa: element});
 					}
