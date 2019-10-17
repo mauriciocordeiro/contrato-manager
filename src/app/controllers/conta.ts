@@ -1,4 +1,15 @@
 export class Conta {
+
+    public static stConta: any[] = [
+        { value: 1, label: 'Pago' },
+        { value: 2, label: 'Em Aberto' }
+    ];
+
+    public static tpConta: any[] = [
+        { value: 1, label: 'Receita' },
+        { value: 2, label: 'Despesa' }
+    ];
+
     public _id: String = void(0);
     public _idContrato: String = void(0);
     public empresa: Empresa = void(0);

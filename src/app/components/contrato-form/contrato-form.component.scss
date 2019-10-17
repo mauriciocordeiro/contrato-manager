@@ -1,0 +1,13 @@
+mat-button-toggle-group {
+    place-content: center;
+    width: 100%;
+
+    mat-button-toggle {
+        width: 100%;
+    }
+}
+
+.inner-component {
+    max-height: 150px;
+    overflow-y: scroll;
+}

@@ -11,7 +11,7 @@
 			</mat-form-field>
 			<mat-form-field fxFlex class="form-field">
 				<mat-label>Empresa</mat-label>
-				<mat-select  formControlName="empresa">
+				<mat-select formControlName="empresa">
 					<mat-option *ngFor="let item of empresas" [value]="item">
 						{{item.nome_fantasia}}
 					</mat-option>
@@ -19,7 +19,7 @@
 			</mat-form-field>
 			<mat-form-field fxFlex="20" class="form-field">
 				<mat-label>Prestação</mat-label>
-				<mat-select  formControlName="prestacao">
+				<mat-select formControlName="prestacao">
 					<mat-option *ngFor="let item of prestacao" [value]="item.value">
 						{{item.label}}
 					</mat-option>
@@ -29,7 +29,7 @@
 		<div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
 			<mat-form-field fxFlex class="form-field">
 				<mat-label>Tipo de Contrato</mat-label>
-				<mat-select  formControlName="tipo_contrato">
+				<mat-select formControlName="tipo_contrato">
 					<mat-option *ngFor="let item of tpContrato" [value]="item.value">
 						{{item.label}}
 					</mat-option>
@@ -61,10 +61,24 @@
 			</mat-form-field>
 		</div>
 		<div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
-			<mat-form-field fxFlex  class="form-field">
+			<mat-form-field fxFlex class="form-field">
 				<mat-label>Observações</mat-label>
 				<textarea matInput placeholder="Observações" formControlName="observacoes_contrato"></textarea>
 			</mat-form-field>
+		</div>
+		<mat-button-toggle-group #group="matButtonToggleGroup">
+			<mat-button-toggle value="1">
+				<span>Contas</span>
+			</mat-button-toggle>
+			<mat-button-toggle value="2">
+				<span>Aditivos</span>
+			</mat-button-toggle>
+		</mat-button-toggle-group>
+		<div *ngIf="group.value==1" fxLayout="column" fxLayoutGap="20px" class="inner-component">
+			<app-conta *ngFor="let conta of contratoForm.value.conta" [conta]="conta"></app-conta>
+		</div>
+		<div *ngIf="group.value==2" fxLayout="column" fxLayoutGap="20px" class="inner-component">
+			<app-aditivo *ngFor="let aditivo of contratoForm.value.aditivo" [aditivo]="aditivo"></app-aditivo>
 		</div>
 	</mat-card-content>
 	<hr>

@@ -137,4 +137,8 @@ export class ContratoFormComponent implements OnInit {
 		this.buildForm();
 	}
 
+
+	onClickAddConta() {
+		this.contratoForm.value.conta.push({})
+	}
 }

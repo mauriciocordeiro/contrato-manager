@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ContratoServices } from './controllers/contrato.services';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSortModule } from '@angular/material';
+import { AditivoComponent } from './components/aditivo/aditivo.component';
 
 @NgModule({
 	declarations: [
@@ -20,7 +21,8 @@ import { MatSortModule } from '@angular/material';
 		ContratoFormComponent,
 		ContaComponent,
 		ContratoComponent,
-		HomeComponent
+		HomeComponent,
+		AditivoComponent
 	],
 	imports: [
 		BrowserModule,

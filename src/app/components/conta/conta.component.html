@@ -1,3 +1,23 @@
-<p>
-  conta works!
-</p>
+<mat-card>
+	<mat-card-content fxFlex fxLayout="column" fxLayoutGap="20px">
+		<div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+			<div fxFlex fxLayout="column" fxLayoutGap="10px">
+				<span class="label">Id</span>
+				<span class="value">{{ conta._id }}</span>
+			</div>
+			<div fxFlex fxLayout="column" fxLayoutGap="10px">
+				<span class="label">Tipo</span>
+				<span class="value">{{ tpConta[conta.tipo_conta-1].label }}</span>
+			</div>
+			<div fxFlex fxLayout="column" fxLayoutGap="10px">
+				<span class="label">Status</span>
+				<span class="value">{{ stConta[conta.status_conta-1].label }}</span>
+			</div>
+			<div fxFlex fxLayout="column" fxLayoutGap="10px">
+				<span class="label">Valor</span>
+				<span class="value">R$ {{ conta.valor_conta }}</span>
+			</div>
+		</div>
+	</mat-card-content>
+	<mat-divider [inset]="true"></mat-divider>
+</mat-card>
