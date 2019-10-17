@@ -1,6 +1,6 @@
 export class Empresa {
     
-    public _id_empresa: String = void(0);
+    public _id: String = void(0);
     public cnpj: String = void(0);
     public razao_social: String = void(0);
 	public nome_fantasia: String = void(0);

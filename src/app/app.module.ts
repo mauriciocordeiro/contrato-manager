@@ -12,6 +12,7 @@ import { ContratoComponent } from './components/contrato/contrato.component';
 import { HomeComponent } from './components/home/home.component';
 import { ContratoServices } from './controllers/contrato.services';
 import { HttpClientModule } from '@angular/common/http';
+import { MatSortModule } from '@angular/material';
 
 @NgModule({
 	declarations: [
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
 		FormsModule,
 		ReactiveFormsModule,
 		FlexLayoutModule,
-		HttpClientModule
+		HttpClientModule,
+		MatSortModule
 	],
 	providers: [
 		ContratoServices,
