@@ -66,20 +66,19 @@
 				<textarea matInput placeholder="Observações" formControlName="observacoes_contrato"></textarea>
 			</mat-form-field>
 		</div>
-		<mat-button-toggle-group #group="matButtonToggleGroup">
-			<mat-button-toggle value="1">
-				<span>Contas</span>
-			</mat-button-toggle>
-			<mat-button-toggle value="2">
-				<span>Aditivos</span>
-			</mat-button-toggle>
-		</mat-button-toggle-group>
-		<div *ngIf="group.value==1" fxLayout="column" fxLayoutGap="20px" class="inner-component">
-			<app-conta *ngFor="let conta of contratoForm.value.conta" [conta]="conta"></app-conta>
-		</div>
-		<div *ngIf="group.value==2" fxLayout="column" fxLayoutGap="20px" class="inner-component">
-			<app-aditivo *ngFor="let aditivo of contratoForm.value.aditivo" [aditivo]="aditivo"></app-aditivo>
-		</div>
+		
+		<mat-card>
+			<mat-card-title class="form-title">Contas</mat-card-title>
+			<mat-card-content fxLayout="column" fxLayoutGap="20px" class="inner-component">
+				<app-conta *ngFor="let conta of contratoForm.value.conta" [conta]="conta"></app-conta>
+			</mat-card-content>
+		</mat-card>
+		<mat-card style="margin-top: 10px;">
+			<mat-card-title class="form-title">Aditivos</mat-card-title>
+			<mat-card-content fxLayout="column" fxLayoutGap="20px" class="inner-component">
+				<app-aditivo *ngFor="let aditivo of contratoForm.value.aditivo" [aditivo]="aditivo"></app-aditivo>
+			</mat-card-content>
+		</mat-card>
 	</mat-card-content>
 	<hr>
 	<mat-card-actions fxLayout="row" fxLayoutGap="20px">
