@@ -19,9 +19,6 @@ mongoose.connect(dataBaseConfig.db, {
 
 // ROUTES =====================================================================
 // ============================================================================
-//
-// contrato -------------------------------------------------------------------
-const contratoRoute = require('../server/routes/contrato.route')
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -30,9 +27,14 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist/contrato-manager')));
 app.use('/', express.static(path.join(__dirname, 'dist/contrato-manager')));
+// contrato -------------------------------------------------------------------
+const contratoRoute = require('../server/routes/contrato.route')
 app.use('/contrato', contratoRoute)
 // ----------------------------------------------------------------------------
-
+// empresa --------------------------------------------------------------------
+const empresaRoute = require('../server/routes/empresa.route')
+app.use('/empresa', empresaRoute)
+// ----------------------------------------------------------------------------
 // ============================================================================
 
 // Create port

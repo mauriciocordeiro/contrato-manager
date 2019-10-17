@@ -2,22 +2,18 @@ import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Contrato } from './contrato';
-import { MatSnackBar } from '@angular/material';
+import { Empresa } from './empresa';
 
 @Injectable({ providedIn: 'root' })
-export class ContratoServices {
-    endpoint: String = 'http://localhost:4000/contrato';
+export class EmpresaServices {
+    endpoint: String = 'http://localhost:4000/empresa';
     headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    constructor(
-        private http: HttpClient,
-        private snackBar: MatSnackBar
-    ) { };
+    constructor(private http: HttpClient) { };
 
     // CREATE =================================================================
-    create(data: Contrato): Observable<any> {
-        const url = `${this.endpoint}/create-contrato`;
+    create(data: Empresa): Observable<any> {
+        const url = `${this.endpoint}/create-empresa`;
         return this.http.post(url, data)
             .pipe(
                 catchError(this.errorHandler)
@@ -30,7 +26,7 @@ export class ContratoServices {
     }
 
     read(id): Observable<any> {
-        const url = `${this.endpoint}/read-contrato/${id}`;
+        const url = `${this.endpoint}/read-empresa/${id}`;
         return this.http.get(url, { headers: this.headers })
             .pipe(
                 map((res: Response) => {
@@ -41,8 +37,8 @@ export class ContratoServices {
     }
 
     // UPDATE =================================================================
-    update(id, data: Contrato): Observable<any> {
-        const url = `${this.endpoint}/update-contrato/${id}`;
+    update(id, data: Empresa): Observable<any> {
+        const url = `${this.endpoint}/update-empresa/${id}`;
         return this.http.put(url, data, { headers: this.headers })
             .pipe(
                 catchError(this.errorHandler)
@@ -51,7 +47,7 @@ export class ContratoServices {
 
     // DELETE =================================================================
     delete(id): Observable<any> {
-        const url = `${this.endpoint}/delete-contrato/${id}`;
+        const url = `${this.endpoint}/delete-empresa/${id}`;
         return this.http.delete(url)
             .pipe(
                 catchError(this.errorHandler)
@@ -69,12 +65,6 @@ export class ContratoServices {
             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
         console.log(errorMessage);
-
-        this.snackBar.open(errorMessage, 'OK', {
-            duration: 3000,
-            panelClass: ['erro-snackbar']
-        });
-
         return throwError(errorMessage);
     }
 
