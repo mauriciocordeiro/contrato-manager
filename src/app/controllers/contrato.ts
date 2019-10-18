@@ -25,7 +25,7 @@ export class Contrato {
         { value: 2, label: 'Produto' }
     ];
 
-    public _id: String = void(0);
+    public _id: Number = void(0);
     public numero: String = void(0);
     public empresa: EmpresaInterface = void(0);
     public copia_contrato: any = void(0);
