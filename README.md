@@ -3,6 +3,8 @@ Controle de contratos do IFBA
 
 ### Configurando
 
+Implementado com a [stack MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle)), configurado como se segue: 
+
 1. Instale o [Node.js](https://nodejs.org/en/download/)
 2. Na raíz do repositório, instale o [Angular](https://angular.io/): `npm install @angular/cli -g`
 3. Instale os pacotes utilizados no projeto com `npm install --save`
@@ -18,5 +20,5 @@ Controle de contratos do IFBA
 
 ---
 
-<sub>referencia [Angular 8 Mean stack Angular Material](https://github.com/SinghDigamber/Angular8MeanstackAngularMaterial/)
+<sub>referência [Angular 8 Mean stack Angular Material](https://github.com/SinghDigamber/Angular8MeanstackAngularMaterial/)
 </sub>

@@ -1,10 +1,11 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { FakeData } from 'src/app/utils/fake.data';
 import { Contrato } from 'src/app/controllers/contrato';
 import { ContratoServices } from 'src/app/controllers/contrato.services';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { EmpresaServices } from 'src/app/controllers/empresa.services';
+import { Empresa } from 'src/app/controllers/empresa';
 
 @Component({
 	selector: 'app-contrato-form',
@@ -13,31 +14,49 @@ import { MatSnackBar } from '@angular/material';
 })
 export class ContratoFormComponent implements OnInit {
 
-	empresas: any[] = FakeData.empresas;
+	idContrato = null;
+
+	empresas: Empresa[];
 
 	tpContrato: any[] = Contrato.tpContrato;
 	prestacao: any[] = Contrato.prestacao;
 	stContrato: any[] = Contrato.stContrato;
 
+	contratoForm: FormGroup;
 
-
-
-	contratoForm:FormGroup;
-
-	constructor( 
+	constructor(
 		public formBuilder: FormBuilder,
 		private router: Router,
+		private actRoute: ActivatedRoute,
 		private snackBar: MatSnackBar,
-		private contratoServices: ContratoServices
-		//private empresaServices: EmpresaServices
-	) { }
+		private contratoServices: ContratoServices,
+		private empresaServices: EmpresaServices
+	) {
+
+		const idContrato = this.actRoute.snapshot.paramMap.get('id');
+		if (idContrato) {
+			this.loadContrato(idContrato);
+		}
+	}
 
 	ngOnInit() {
+		this.loadEmpresas();
+
 		this.buildForm();
 	}
 
-	buildForm(contrato?:Contrato) {
-		if(!contrato) {
+	loadContrato(id) {
+		this.contratoServices.read(id).subscribe(response => {
+			if (response) {
+				this.buildForm(response);
+				this.idContrato = id;
+			}
+		});
+	}
+
+	buildForm(contrato?: Contrato) {
+		if (!contrato) {
+			this.idContrato = null;
 			contrato = new Contrato();
 		}
 
@@ -51,26 +70,75 @@ export class ContratoFormComponent implements OnInit {
 			valor_contrato: [contrato.valor_contrato],
 			data_celebracao_contrato: [contrato.data_celebracao_contrato, [Validators.required]],
 			data_finalizacao_contrato: [contrato.data_finalizacao_contrato],
-			observacoes_contrato: [contrato.data_celebracao_contrato, [Validators.required]],
+			observacoes_contrato: [contrato.observacoes_contrato],
 			aditivo: [contrato.aditivo],
 			conta: [contrato.conta]
+		});
+
+		setTimeout(_ => {
+			if(this.idContrato) {
+				this.empresas.forEach(element => {
+					if(element._id == contrato.empresa._id_empresa) {
+						this.contratoForm.patchValue({empresa: element});
+					}
+				});			
+			}
+		}, 300);
+	}
+
+	loadEmpresas() {
+		this.empresaServices.readAll().subscribe(result => {
+			this.empresas = result as Empresa[];
 		});
 	}
 
 	submit() {
-		if(!this.contratoForm.valid) {
-			alert("Campos inválidos");
+		if (!this.contratoForm.valid) {
+			Object.keys(this.contratoForm.controls).forEach(control => {
+				this.contratoForm.get(control).markAsTouched();
+			});
+			this.snackBar.open('Existem campos inválidos.', 'OK', {
+				duration: 3000,
+				panelClass: ['warning-snackbar']
+			});
 			return;
 		}
 
-		this.contratoServices.create(this.contratoForm.value)
-			.subscribe( result => {
+		let contrato: Contrato = this.contratoForm.value as Contrato;
+		// reduce data
+		contrato.empresa = {
+			_id_empresa: this.contratoForm.value.empresa._id,
+			cnpj: this.contratoForm.value.empresa.cnpj,
+			razao_social: this.contratoForm.value.empresa.razao_social
+		};
+
+		if(this.idContrato) {
+			this.contratoServices.update(this.idContrato, contrato)
+				.subscribe(response => {
+					this.snackBar.open('Salvo com sucesso!', 'OK', {
+						duration: 3000,
+						panelClass: ['success-snackbar']
+					});
+	
+				});
+		} else {
+			this.contratoServices.create(contrato)
+			.subscribe(result => {
 				this.snackBar.open('Salvo com sucesso!', 'OK', {
 					duration: 3000,
 					panelClass: ['success-snackbar']
-				  });
+				});
+				this.buildForm();
 			});
-		
+		}
 	}
 
+	cancel() {
+		this.buildForm();
+	}
+
+
+	onClickAddConta() {
+		this.contratoForm.value.conta.push({})
+	}
 }

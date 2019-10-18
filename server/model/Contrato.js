@@ -1,24 +1,31 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+function deleteEmpty(v) {
+    if (v == null) {
+        return undefined;
+    }
+    return v;
+}
+
 // Define collection and schema
-let Contrato = new Schema (
+let Contrato = new Schema(
     {
-        numero: { type: Schema.Types.String },
-        empresa: { type: Schema.Types.Object },
-        copia_contrato: { type: Schema.Types.Mixed },
-        tipo_contrato: { type: Schema.Types.Number },
-        prestacao: { type: Schema.Types.Number },
-        status_contrato: { type: Schema.Types.Number },
-        valor_contrato: { type: Schema.Types.Decimal128 },
-        data_celebracao_contrato: { type: Schema.Types.Date },
-        data_finalizacao_contrato: { type: Schema.Types.Date },
-        observacoes_contrato: { type: Schema.Types.String },
-        aditivo: { type: Schema.Types.Array },
-        conta: { type: Schema.Types.Array }
+        numero: { type: String, required: true },
+        empresa: { type: Object, required: true },
+        copia_contrato: { type: Buffer, set: deleteEmpty },
+        tipo_contrato: { type: Number, required: true },
+        prestacao: { type: Number, required: true },
+        status_contrato: { type: Number, required: true },
+        valor_contrato: { type: Number, set: deleteEmpty },
+        data_celebracao_contrato: { type: Date, required: true },
+        data_finalizacao_contrato: { type: Date, set: deleteEmpty },
+        observacoes_contrato: { type: String, set: deleteEmpty },
+        aditivo: { type: Array, set: deleteEmpty },
+        conta: { type: Array, set: deleteEmpty }
     },
     {
-        collection: 'contratos'
+        collection: 'contrato'
     }
 )
 
