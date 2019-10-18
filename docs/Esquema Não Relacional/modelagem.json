@@ -24,7 +24,7 @@ Empresa: {
 		valor_contrato:decimal,
 		numero:string,
 		aditivo:[{
-			_id_aditivo:ObjectId
+			_id_aditivo:ObjectId,
 			valor_contrato_aditivo:decimal,
 			data_vencimento_aditivo:date
 		}]
