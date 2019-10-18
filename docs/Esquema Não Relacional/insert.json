@@ -1,10 +1,10 @@
 db.setor.insert([
 	{	
-		_id: 1, 
+		_id: NumberInt(1), 
 		nome: 'Fiscal'
 	},
 	{	
-		_id: 2, 
+		_id: NumberInt(2), 
 		nome: 'Financeiro'
 	}
 
@@ -12,7 +12,7 @@ db.setor.insert([
 
 db.usuario.insert([
 	{	
-		_id: 1, 
+		_id: NumberInt(1), 
 		nome: 'Cassio', 
 		login: 'cassio', 
 		senha: '12345', 
@@ -22,7 +22,7 @@ db.usuario.insert([
 		}
 	},
 	{	
-		_id: 2, 
+		_id: NumberInt(2), 
 		nome: 'Ezequiel', 
 		login: 'ezequiel', 
 		senha: '101010', 
@@ -33,11 +33,9 @@ db.usuario.insert([
 	}
 ]);
 
-
-
 db.empresa.insert([
 	{
-		_id: 1, 
+		_id: NumberInt(1), 
 		cnpj: '11111111111111', 
 		razao_social: 'Coelba Limitada', 
 		nome_fantasia: 'Coelba Conquista', 
@@ -80,7 +78,7 @@ db.empresa.insert([
 		]
 	},
 	{
-		_id: 2, 
+		_id: NumberInt(2), 
 		cnpj: '22222222222222', 
 		razao_social: 'Embasa Limitada', 
 		nome_fantasia: 'Embasa Conquista', 
@@ -113,7 +111,7 @@ db.empresa.insert([
 		]
 	},
 	{
-		_id: 3, 
+		_id: NumberInt(3), 
 		cnpj: '33333333333333', 
 		razao_social: 'Lanchonete Teixeira', 
 		nome_fantasia: 'Lanchonete Teixeira', 
@@ -155,7 +153,7 @@ db.empresa.insert([
 		]
 	},
 	{
-		_id: 4, 
+		_id: NumberInt(4), 
 		cnpj: '44444444444444', 
 		razao_social: 'Seguro Alunos RSA', 
 		nome_fantasia: 'Seguro', 
@@ -212,7 +210,7 @@ db.empresa.insert([
 db.contrato.insert([
 
 	{
-		_id: 1,
+		_id: NumberInt(1),
 		copia_contrato: 'C:\copia100.pdf',
 		tipo_contrato: 1, 
 		prestacao: 1,
@@ -244,7 +242,7 @@ db.contrato.insert([
 		]
 	},
 	{
-		_id: 2,
+		_id: NumberInt(2),
 		copia_contrato: 'C:\copia200.pdf',
 		tipo_contrato: 1, 
 		prestacao: 1,
@@ -262,7 +260,7 @@ db.contrato.insert([
 		
 	},
 	{
-		_id: 3,
+		_id: NumberInt(3),
 		copia_contrato: 'C:\copia50.pdf',
 		tipo_contrato: 1, 
 		prestacao: 1,
@@ -287,7 +285,7 @@ db.contrato.insert([
 		]
 	},
 	{
-		_id: 4,
+		_id: NumberInt(4),
 		copia_contrato: 'C:\copia3000.pdf',
 		tipo_contrato: 1, 
 		status_contrato: 2, 
@@ -311,7 +309,7 @@ db.contrato.insert([
 		]
 	},
 	{
-		_id: 5,
+		_id: NumberInt(5),
 		copia_contrato: 'C:\copia300.pdf',
 		tipo_contrato: 2, 
 		prestacao: 1,
@@ -356,7 +354,7 @@ db.contrato.insert([
 		]
 	},
 	{
-		_id: 6,
+		_id: NumberInt(6),
 		copia_contrato: 'C:\copia400.pdf',
 		tipo_contrato: 1, 
 		prestacao: 1,
@@ -373,7 +371,7 @@ db.contrato.insert([
 		}
 	},
 	{
-		_id: 7,
+		_id: NumberInt(7),
 		copia_contrato: 'C:\copia5000.pdf',
 		tipo_contrato: 2, 
 		prestacao: 1,
@@ -404,7 +402,7 @@ db.contrato.insert([
 		]
 	},
 	{
-		_id: 8,
+		_id: NumberInt(8),
 		copia_contrato: 'C:\copia123.pdf',
 		tipo_contrato: 2, 
 		prestacao: 1,
@@ -420,7 +418,7 @@ db.contrato.insert([
 		}
 	},
 	{
-		_id: 9,
+		_id: NumberInt(9),
 		copia_contrato: 'C:\copia555.pdf',
 		tipo_contrato: 'Construtora', 
 		prestacao: 1,
@@ -460,7 +458,7 @@ db.contrato.insert([
 		]
 	},
 	{
-		_id: 10,
+		_id: NumberInt(10),
 		copia_contrato: 'C:\copia789.pdf',
 		tipo_contrato: 2, 
 		prestacao: 1,
@@ -491,7 +489,7 @@ db.contrato.insert([
 		]
 	},
 	{
-		_id: 11,
+		_id: NumberInt(11),
 		copia_contrato: 'C:\copia55.pdf',
 		tipo_contrato: 1, 
 		prestacao: 1,
@@ -516,7 +514,7 @@ db.contrato.insert([
 		]
 	},
 	{
-		_id: 12,
+		_id: NumberInt(12),
 		copia_contrato: 'C:\copia234.pdf',
 		tipo_contrato: 1, 
 		prestacao: 1,
@@ -545,10 +543,9 @@ db.contrato.insert([
 
 ]);
 
-
 db.conta.insert([
 	{
-		_id: 1,
+		_id: NumberInt(1),
 		_id_contrato:1,
 		empresa:{
 			_id_empresa:1,
@@ -567,7 +564,7 @@ db.conta.insert([
 		}
 	},
 	{
-		_id: 2,
+		_id: NumberInt(2),
 		_id_contrato:5,
 		empresa:{
 			_id_empresa:4,
@@ -586,7 +583,7 @@ db.conta.insert([
 		}
 	},
 	{
-		_id: 3,
+		_id: NumberInt(3),
 		_id_contrato:5,
 		empresa:{
 			_id_empresa:4,
@@ -605,7 +602,7 @@ db.conta.insert([
 		}
 	},
 	{
-		_id: 4,
+		_id: NumberInt(4),
 		_id_contrato:7,
 		empresa:{
 			_id_empresa:4,
@@ -624,7 +621,7 @@ db.conta.insert([
 		}
 	},
 	{
-		_id: 5,
+		_id: NumberInt(5),
 		_id_contrato:7,
 		empresa:{
 			_id_empresa:4,
@@ -639,7 +636,7 @@ db.conta.insert([
 		valor_conta:10286.00
 	},
 	{
-		_id: 6,
+		_id: NumberInt(6),
 		_id_contrato:9,
 		empresa:{
 			_id_empresa:5,
@@ -658,7 +655,7 @@ db.conta.insert([
 		}
 	},
 	{
-		_id: 7,
+		_id: NumberInt(7),
 		_id_contrato:10,
 		empresa:{
 			_id_empresa:6,
@@ -672,7 +669,7 @@ db.conta.insert([
 		valor_conta:760.00
 	},
 	{
-		_id: 8,
+		_id: NumberInt(8),
 		_id_contrato:10,
 		empresa:{
 			_id_empresa:6,
