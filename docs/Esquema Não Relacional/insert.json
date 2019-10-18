@@ -41,7 +41,7 @@ db.empresa.insert([
 		cnpj: '11111111111111', 
 		razao_social: 'Coelba Limitada', 
 		nome_fantasia: 'Coelba Conquista', 
-		email: 'coelba@provedor.com'
+		email: 'coelba@provedor.com',
 		endereco:{
 			rua: 'Olivia Flores', 
 			numero: 100, 
@@ -62,18 +62,16 @@ db.empresa.insert([
 		contratos:[
 			{
 				_id_contrato: 1,
-				tipo_contrato: 'Licitatorio', 
-				status_contrato: 'Ativo', 
+				tipo_contrato: 1, 
+				status_contrato: 1, 
 				valor_contrato: 12357.00, 
 				numero: '12345',
 				aditivos:[
 					{
-						_id_aditivo: 1, 
 						valor_contrato_aditivo: 9300.00, 
 						data_vencimento: '2014-12-02'
 					},
 					{
-						_id_aditivo: 2, 
 						valor_contrato_aditivo: 10100.00, 
 						data_vencimento: '2015-12-03'
 					}
@@ -86,7 +84,7 @@ db.empresa.insert([
 		cnpj: '22222222222222', 
 		razao_social: 'Embasa Limitada', 
 		nome_fantasia: 'Embasa Conquista', 
-		email: 'embasa@provedor.com'
+		email: 'embasa@provedor.com',
 		endereco:{
 			rua: 'Para', 
 			numero: 200, 
@@ -107,8 +105,8 @@ db.empresa.insert([
 		contratos:[
 			{
 				_id_contrato: 2,
-				tipo_contrato: 'Licitatorio', 
-				status_contrato: 'Ativo', 
+				tipo_contrato: 1, 
+				status_contrato: 1, 
 				valor_contrato: 8570.00, 
 				numero: '45623'
 			}
@@ -119,7 +117,7 @@ db.empresa.insert([
 		cnpj: '33333333333333', 
 		razao_social: 'Lanchonete Teixeira', 
 		nome_fantasia: 'Lanchonete Teixeira', 
-		email: 'teixeirao@provedor.com'
+		email: 'teixeirao@provedor.com',
 		endereco:{
 			rua: 'Siqueira Campos', 
 			numero: 300, 
@@ -136,13 +134,12 @@ db.empresa.insert([
 		contratos:[
 			{
 				_id_contrato: 3,
-				tipo_contrato: 'Licitatorio', 
-				status_contrato: 'Finalizado', 
+				tipo_contrato: 1, 
+				status_contrato: 2, 
 				valor_contrato: 17400.00, 
 				numero: '83452',
 				aditivos:[
 					{
-						_id_aditivo: 1, 
 						valor_contrato_aditivo: 12700.00, 
 						data_vencimento: '2015-11-03'
 					}
@@ -150,8 +147,8 @@ db.empresa.insert([
 			},
 			{
 				_id_contrato: 4,
-				tipo_contrato: 'Licitatorio', 
-				status_contrato: 'Finalizado', 
+				tipo_contrato: 1, 
+				status_contrato: 2, 
 				valor_contrato: 20530.00, 
 				numero: '83462'
 			}
@@ -162,7 +159,7 @@ db.empresa.insert([
 		cnpj: '44444444444444', 
 		razao_social: 'Seguro Alunos RSA', 
 		nome_fantasia: 'Seguro', 
-		email: 'segurorsa@provedor.com'
+		email: 'segurorsa@provedor.com',
 		endereco:{
 			rua: 'Nove de Novembro', 
 			numero: 400, 
@@ -179,18 +176,16 @@ db.empresa.insert([
 		contratos:[
 			{
 				_id_contrato: 5,
-				tipo_contrato: 'Permanente', 
-				status_contrato: 'Ativo', 
+				tipo_contrato: 2, 
+				status_contrato: 1, 
 				valor_contrato: 15900.00, 
 				numero: '23742',
 				aditivos:[
 					{
-						_id_aditivo: 1, 
 						valor_contrato_aditivo: 54890.00, 
 						data_vencimento: '2014-09-23'
 					},
 					{
-						_id_aditivo: 2, 
 						valor_contrato_aditivo: 62340.00, 
 						data_vencimento: '2015-09-25'
 					}
@@ -198,15 +193,15 @@ db.empresa.insert([
 			},
 			{
 				_id_contrato: 6,
-				tipo_contrato: 'Licitatorio', 
-				status_contrato: 'Cancelado', 
+				tipo_contrato: 1, 
+				status_contrato: 3, 
 				valor_contrato: 13985.00, 
 				numero: '84563'
 			},
 			{
 				_id_contrato: 7,
-				tipo_contrato: 'Permanente', 
-				status_contrato: 'Ativo', 
+				tipo_contrato: 2, 
+				status_contrato: 1, 
 				valor_contrato: 21285.00, 
 				numero: '02352'
 			}
@@ -217,87 +212,485 @@ db.empresa.insert([
 db.contrato.insert([
 
 	{
-		_id_contrato: 1,
+		_id: 1,
 		copia_contrato: 'C:\copia100.pdf',
-		tipo_contrato: 'Licitatorio', 
-		prestacao: 'Servico',
-		status_contrato: 'Ativo', 
+		tipo_contrato: 1, 
+		prestacao: 1,
+		status_contrato: 1, 
 		valor_contrato: 12357.00, 
 		data_celebracao: '2013-11-02',
-		data_finalizacao: '2014-11-02'
+		data_finalizacao: '2014-11-02',
 		numero: '12345',
-		empresa:[
-			{
-				id_empresa: 1,
-				cnpj: '11111111111111', 
-				razao_social: 'Coelba Limitada'
-				
-			}
-		]
+		empresa:{
+			id_empresa: 1,
+			cnpj: '11111111111111', 
+			razao_social: 'Coelba Limitada'
+			
+		},
 		aditivos:[
 			{
-				_id_aditivo: 1, 
-				copia_contrato_aditivo: 'C:\copia201.pdf'
+				copia_contrato_aditivo: 'C:\copia201.pdf',
 				valor_contrato_aditivo: 9300.00, 
-				data_renovacao: '2013-12-02'
+				data_renovacao: '2013-12-02',
 				data_vencimento: '2014-12-02',
 				observacoes: 'Foi conversado que será oferecido um serviço compo para alunos de baixa renda'
 			},
 			{
-				_id_aditivo: 2, 
-				copia_contrato_aditivo: 'C:\copia201.pdf'
+				copia_contrato_aditivo: 'C:\copia201.pdf',
 				valor_contrato_aditivo: 10100.00, 
-				data_renovacao: '2014-12-03'
+				data_renovacao: '2014-12-03',
 				data_vencimento: '2015-12-03'
 			}
 		]
 	},
 	{
-		_id_contrato: 2,
+		_id: 2,
 		copia_contrato: 'C:\copia200.pdf',
-		tipo_contrato: 'Licitatorio', 
-		prestacao: 'Servico',
-		status_contrato: 'Ativo', 
+		tipo_contrato: 1, 
+		prestacao: 1,
+		status_contrato: 1, 
 		valor_contrato: 8570.00, 
 		data_celebracao: '2012-12-01',
 		data_finalizacao: '2013-12-01',
 		observacoes: 'Reclamações por parte dos Alunos do Curso dde BSI no dia  23/10/2014',
 		numero: '45623',
-		empresa:[
-			{
-				id_empresa: 1,
-				cnpj: '22222222222222', 
-				razao_social: 'Embasa Limitada'
-				
-			}
-		]
+		empresa:{
+			id_empresa: 2,
+			cnpj: '22222222222222', 
+			razao_social: 'Embasa Limitada'
+		}
+		
 	},
 	{
-		_id_contrato: 3,
+		_id: 3,
 		copia_contrato: 'C:\copia50.pdf',
-		tipo_contrato: 'Licitatorio', 
-		prestacao: 'Servico',
-		status_contrato: 'Finalizado', 
+		tipo_contrato: 1, 
+		prestacao: 1,
+		status_contrato: 2, 
 		valor_contrato: 17400.00, 
 		data_celebracao: '2011-05-16',
 		data_finalizacao: '2012-05-06',
 		numero: '83452',
+		empresa:{
+			id_empresa: 3,
+			cnpj: '33333333333333', 
+			razao_social: 'Lanchonete Teixeira'
+			
+		},
 		aditivos:[
 			{
-				_id_aditivo: 1, 
+				copia_contrato_aditivo: 'C:\copia10001.pdf',
 				valor_contrato_aditivo: 12700.00, 
+				data_renovacao: '2014-11-03',
 				data_vencimento: '2015-11-03'
 			}
 		]
 	},
 	{
-		_id_contrato: 4,
-		tipo_contrato: 'Licitatorio', 
-		status_contrato: 'Finalizado', 
+		_id: 4,
+		copia_contrato: 'C:\copia3000.pdf',
+		tipo_contrato: 1, 
+		status_contrato: 2, 
 		valor_contrato: 20530.00, 
-		numero: '83462'
+		numero: '83462',
+		empresa:[
+			{
+				id_empresa: 3,
+				cnpj: '33333333333333', 
+				razao_social: 'Lanchonete Teixeira'
+				
+			}
+		],
+		contas:[
+			{
+				_id_conta: 1,
+				tipo_conta: 2,
+				status_conta: 1,
+				valor_conta: 12987.00
+			}
+		]
+	},
+	{
+		_id: 5,
+		copia_contrato: 'C:\copia300.pdf',
+		tipo_contrato: 2, 
+		prestacao: 1,
+		status_contrato: 1, 
+		valor_contrato: 15542.00, 
+		data_celebracao: '2000-11-15',
+		numero: '23742',
+		empresa:{
+			id_empresa: 4,
+			cnpj: '44444444444444', 
+			razao_social: 'Lanchonete Teixeira'
+			
+		},
+		aditivos:[
+			{
+				copia_contrato_aditivo: 'C:\copia55501.pdf',
+				valor_contrato_aditivo: 54890.00, 
+				data_renovacao: '2013-09-23',
+				data_vencimento: '2014-09-23'
+			},
+			{
+				copia_contrato_aditivo: 'C:\copia55502.pdf',
+				valor_contrato_aditivo: 62340.00, 
+				data_renovacao: '2014-09-25',
+				data_vencimento: '2015-09-25'
+			}
+		],
+		contas:[
+			{
+				_id_conta: 2,
+				tipo_conta: 2,
+				status_conta: 1,
+				valor_conta: 15321.00
+			},
+			{
+				_id_conta: 3,
+				tipo_conta: 2,
+				status_conta: 1,
+				valor_conta: 9343.00
+			}
+			
+		]
+	},
+	{
+		_id: 6,
+		copia_contrato: 'C:\copia400.pdf',
+		tipo_contrato: 1, 
+		prestacao: 1,
+		status_contrato: 3, 
+		valor_contrato: 13985.00, 
+		data_celebracao: '2012-12-01',
+		data_finalizacao: '2013-12-01',
+		numero: '84563',
+		empresa:{
+			id_empresa: 4,
+			cnpj: '44444444444444', 
+			razao_social: 'Lanchonete Teixeira'
+			
+		}
+	},
+	{
+		_id: 7,
+		copia_contrato: 'C:\copia5000.pdf',
+		tipo_contrato: 2, 
+		prestacao: 1,
+		status_contrato: 1, 
+		valor_contrato: 10900.00, 
+		data_celebracao: '2001-05-20',
+		numero: '02352',
+		empresa:{
+			id_empresa: 4,
+			cnpj: '44444444444444', 
+			razao_social: 'Lanchonete Teixeira'
+			
+		},
+		contas:[
+			{
+				_id_conta: 4,
+				tipo_conta: 2,
+				status_conta: 2,
+				valor_conta: 10286.00
+			},
+			{
+				_id_conta: 5,
+				tipo_conta: 2,
+				status_conta: 1,
+				valor_conta: 9343.00
+			}
+			
+		]
+	},
+	{
+		_id: 8,
+		copia_contrato: 'C:\copia123.pdf',
+		tipo_contrato: 2, 
+		prestacao: 1,
+		status_contrato: 1, 
+		valor_contrato: 13440.00, 
+		data_celebracao: '2000-10-21',
+		numero: '83562',
+		empresa:{
+			id_empresa: 5,
+			cnpj: '55555555555555', 
+			razao_social: 'Coelba Limitada'
+			
+		}
+	},
+	{
+		_id: 9,
+		copia_contrato: 'C:\copia555.pdf',
+		tipo_contrato: 'Construtora', 
+		prestacao: 1,
+		status_contrato: 1, 
+		valor_contrato: 75890.00, 
+		data_celebracao: '2012-09-21',
+		observacoes: 'Houve risco de embargo na visita do Orgão fiscalizador por conta da falta de EPIs e EPCs para os funcionarios. Solucionado pela empresa.',
+		numero: '57358',
+		empresa:{
+			id_empresa: 5,
+			cnpj: '55555555555555', 
+			razao_social: 'Coelba Limitada'
+			
+		},
+		aditivos:[
+			{
+				copia_contrato_aditivo: 'C:\copia5502.pdf',
+				valor_contrato_aditivo: 23500.00, 
+				data_renovacao: '2013-05-08',
+				data_vencimento: '2015-05-08'
+			},
+			{
+				copia_contrato_aditivo: 'C:\copia5503.pdf',
+				valor_contrato_aditivo: 31250.00, 
+				data_renovacao: '2014-05-09',
+				data_vencimento: '2015-05-09'
+			}
+		],
+		contas:[
+			{
+				_id_conta: 6,
+				tipo_conta: 1,
+				status_conta: 2,
+				valor_conta: 760.00
+			}
+			
+		]
+	},
+	{
+		_id: 10,
+		copia_contrato: 'C:\copia789.pdf',
+		tipo_contrato: 2, 
+		prestacao: 1,
+		status_contrato: 2, 
+		valor_contrato: 8890.00, 
+		data_celebracao: '2002-05-08',
+		numero: '24724',
+		empresa:{
+			id_empresa: 6,
+			cnpj: '66666666666666', 
+			razao_social: 'Contrulita Prestadora de Serviços em Construções Empresariais SA'
+			
+		},
+		contas:[
+			{
+				_id_conta: 7,
+				tipo_conta: 1,
+				status_conta: 2,
+				valor_conta: 760.00
+			},
+			{
+				_id_conta: 8,
+				tipo_conta: 2,
+				status_conta: 1,
+				valor_conta: 11570.00
+			}
+			
+		]
+	},
+	{
+		_id: 11,
+		copia_contrato: 'C:\copia55.pdf',
+		tipo_contrato: 1, 
+		prestacao: 1,
+		status_contrato: 1, 
+		valor_contrato: 20000.00, 
+		data_celebracao: '2012-04-10',
+		data_finalizacao: '2013-04-10',
+		numero: '67347',
+		empresa:{
+			id_empresa: 7,
+			cnpj: '77777777777777', 
+			razao_social: 'Companhia Telefonica'
+			
+		},
+		aditivos:[
+			{
+				copia_contrato_aditivo: 'C:\copia100002.pdf',
+				valor_contrato_aditivo: 13000.00, 
+				data_renovacao: '2014-11-04',
+				data_vencimento: '2015-11-04'
+			}
+		]
+	},
+	{
+		_id: 12,
+		copia_contrato: 'C:\copia234.pdf',
+		tipo_contrato: 1, 
+		prestacao: 1,
+		status_contrato: 1, 
+		valor_contrato: 34580.00, 
+		data_celebracao: '2012-02-03',
+		data_finalizacao: '2013-02-03',
+		numero: '34622',
+		empresa:{
+			id_empresa: 7,
+			cnpj: '77777777777777', 
+			razao_social: 'Companhia Telefonica'
+			
+		},
+		aditivos:[
+			{
+				copia_contrato_aditivo: 'C:\copia23401.pdf',
+				valor_contrato_aditivo: 42345.00, 
+				data_renovacao: '2013-02-04',
+				data_vencimento: '2014-02-04',
+				observacoes: 'Ampliou o quadro de fincionários em 10 pessoas'
+			}
+		]
 	}
 		
 
 ]);
 
+
+db.conta.insert([
+	{
+		_id: 1,
+		_id_contrato:1,
+		empresa:{
+			_id_empresa:1,
+			nome_fantasia:'Coelba Limitada'
+		},
+		copia_conta:'C:\copia300_01.pdf',
+		tipo_conta:'Despesa',
+		status_conta:'Pago',
+		data_vencimento_conta:'2014-05-06',
+		data_recebimento_setor:'2014-05-02',
+		data_envio_dof:'2014-05-02',
+		valor_conta:12987.00,
+		pagamento:{
+			data_pagamento_conta:'2014-05-04',
+			valor_pago:12987.00
+		}
+	},
+	{
+		_id: 2,
+		_id_contrato:5,
+		empresa:{
+			_id_empresa:4,
+			nome_fantasia:'Seguro Alunos RSA'
+		},
+		copia_conta:'C:\copia300_02.pdf',
+		tipo_conta:'Despesa',
+		status_conta:'Pago',
+		data_vencimento_conta: '2014-06-06',
+		data_recebimento_setor: '2014-06-05',
+		data_envio_dof: '2014-06-05',
+		valor_conta:15321.00,
+		pagamento:{
+			data_pagamento_conta:'2014-06-06',
+			valor_pago:15321.00
+		}
+	},
+	{
+		_id: 3,
+		_id_contrato:5,
+		empresa:{
+			_id_empresa:4,
+			nome_fantasia:'Seguro Alunos RSA'
+		},
+		copia_conta:'C:\copia5000_01.pdf',
+		tipo_conta:'Despesa',
+		status_conta:'Pago',
+		data_vencimento_conta: '2014-05-10',
+		data_recebimento_setor: '2014-05-05',
+		data_envio_dof: '2014-05-06',
+		valor_conta:9343.00,
+		pagamento:{
+			data_pagamento_conta:'2014-05-08',
+			valor_pago:9343.00
+		}
+	},
+	{
+		_id: 4,
+		_id_contrato:7,
+		empresa:{
+			_id_empresa:4,
+			nome_fantasia:'Seguro Alunos RSA'
+		},
+		copia_conta:'C:\copia5000_02.pdf',
+		tipo_conta:'Despesa',
+		status_conta:'Pago',
+		data_vencimento_conta: '2014-06-10',
+		data_recebimento_setor: '2014-06-09',
+		data_envio_dof: '2014-06-09',
+		valor_conta:8743.00,
+		pagamento:{
+			data_pagamento_conta:'2014-06-10',
+			valor_pago:8743.00
+		}
+	},
+	{
+		_id: 5,
+		_id_contrato:7,
+		empresa:{
+			_id_empresa:4,
+			nome_fantasia:'Seguro Alunos RSA'
+		},
+		copia_conta:'C:\copia5000_03.pdf',
+		tipo_conta:'Despesa',
+		status_conta:'Em Aberto',
+		data_vencimento_conta: '2014-07-10',
+		data_recebimento_setor: '2014-07-01',
+		data_envio_dof: '2014-07-01',
+		valor_conta:10286.00
+	},
+	{
+		_id: 6,
+		_id_contrato:9,
+		empresa:{
+			_id_empresa:5,
+			nome_fantasia:'Coelba Limitada'
+		},
+		copia_conta:'C:\copia200_01.pdf',
+		tipo_conta:'Receita',
+		status_conta:'Pago',
+		data_vencimento_conta: '2014-06-11',
+		data_recebimento_setor: '2014-06-07',
+		data_envio_dof: '2014-06-07',
+		valor_conta:760.00,
+		pagamento:{
+			data_pagamento_conta:'2014-06-09',
+			valor_pago:760.00
+		}
+	},
+	{
+		_id: 7,
+		_id_contrato:10,
+		empresa:{
+			_id_empresa:6,
+			nome_fantasia:'Construlita'
+		},
+		copia_conta:'C:\copia200_02.pdf',
+		tipo_conta:'Receita',
+		status_conta:'Em Aberto',
+		data_vencimento_conta: '2014-07-11',
+		data_recebimento_setor: '2014-07-07',
+		valor_conta:760.00
+	},
+	{
+		_id: 8,
+		_id_contrato:10,
+		empresa:{
+			_id_empresa:6,
+			nome_fantasia:'Construlita'
+		},
+		copia_conta:'C:\copia300_03.pdf',
+		tipo_conta:'Despesa',
+		status_conta:'Pago',
+		data_vencimento_conta: '2014-07-06',
+		data_recebimento_setor: '2014-07-01',
+		data_envio_dof: '2014-07-04',
+		valor_conta:11570.00,
+		pagamento:{
+			data_pagamento_conta:'2014-07-10',
+			valor_pago:12527.00,
+			taxa_juro: 10
+		}
+	}
+	
+
+]);

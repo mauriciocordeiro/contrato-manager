@@ -34,28 +34,28 @@ Empresa: {
 
 
 Contrato: {
-	_id_contrato:ObjectId,
+	_id:ObjectId,
 	numero: string,
 	empresa:{
 		_id_empresa:ObjectId,
 		cnpj:string,
 		razao_social:string
 	},
-	copia_contrato:binData,
+	copia_contrato:string,
 	tipo_contrato:int,
 	prestacao:int,
 	status_contrato:int,
 	valor_contrato:decimal,
 	data_celebracao_contrato:date,
 	data_finalizacao_contrato:date,
-	observacoes_contrato:binData,
+	observacoes_contrato:string,
 	aditivo:[{
 		_id_aditivo:ObjectId
-		copia_contrato_aditivo:binData,
+		copia_contrato_aditivo:string,
 		valor_contrato_aditivo:decimal,
 		data_renovacao:date,
 		data_vencimento:date,
-		observacoes:binData
+		observacoes:string
 	}],
 	conta: [{
 		_id_conta:ObjectId,
@@ -72,14 +72,14 @@ Conta:{
 		_id_empresa:ObjectId,
 		nome_fantasia:string
 	},
-	copia_conta:binData,
+	copia_conta:string,
 	tipo_conta:int,
 	status_conta:int,
 	data_vencimento_conta:date,
 	data_recebimento_setor:date,
 	data_envio_dof:date,
 	valor_conta:decimal,
-	observacoes_conta:binData,
+	observacoes_conta:string,
 	pagamento:{
 		data_pagamento_conta:date,
 		valor_pago:decimal,

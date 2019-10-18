@@ -90,7 +90,7 @@ INSERT INTO Contrato (id_contrato, id_empresa, copia_contrato, tipo_contrato, pr
 INSERT INTO Contrato (id_contrato, id_empresa, copia_contrato, tipo_contrato, prestacao, status_contrato, valor_contrato, data_celebracao, data_finalizacao, observacoes, numero)
 	VALUES (1, 5, 'C:\copia123.pdf', 'Permanente', 'Servico', 'Ativo', NULL, '2000-10-21', NULL, NULL, '83562');
 INSERT INTO Contrato (id_contrato, id_empresa, copia_contrato, tipo_contrato, prestacao, status_contrato, valor_contrato, data_celebracao, data_finalizacao, observacoes, numero)
-	VALUES (2, 5, 'C:\copia555.pdf', 'Construtora', 'Servico', 'Ativo', '75890', '2012-09-21', NULL, 'Houve risco de embargo na visita do Orgão fiscalizador por conta da falta de EPIs e EPCs para os funcionarios. Solucionado pela empresa.', '57358');
+	VALUES (2, 5, 'C:\copia555.pdf', 'Construtora', 'Servico', 'Ativo', 75890.00, '2012-09-21', NULL, 'Houve risco de embargo na visita do Orgão fiscalizador por conta da falta de EPIs e EPCs para os funcionarios. Solucionado pela empresa.', '57358');
 INSERT INTO Contrato (id_contrato, id_empresa, copia_contrato, tipo_contrato, prestacao, status_contrato, valor_contrato, data_celebracao, data_finalizacao, observacoes, numero)
 	VALUES (1, 6, 'C:\copia789.pdf', 'Permanente', 'Servico', 'Finalizado', NULL, '2002-05-08', NULL, NULL, '24724');
 INSERT INTO Contrato (id_contrato, id_empresa, copia_contrato, tipo_contrato, prestacao, status_contrato, valor_contrato, data_celebracao, data_finalizacao, observacoes, numero)
@@ -162,5 +162,5 @@ INSERT INTO CONTA (id_conta, id_contrato, id_empresa, copia_conta, tipo_conta, s
 INSERT INTO CONTA (id_conta, id_contrato, id_empresa, copia_conta, tipo_conta, status_conta, data_vencimento_conta, data_recebimento_setor, data_envio_dof, valor_conta, observacoes_conta, id_usuario)
 	VALUES (2, 1, 6, 'C:\copia300_03.pdf', 'Despesa', 'Pago', '2014-07-06', '2014-07-01', '2014-07-04', 11570.00, NULL, 1);
 INSERT INTO PAGAMENTO(id_pagamento, id_conta, id_contrato, id_empresa, valor_pago, taxa_juros, data_pagamento_conta)	
-	VALUES(1, 2, 1, 6, 12527.00, 0, '2014-07-10')					
+	VALUES(1, 2, 1, 6, 12527.00, 10, '2014-07-10')					
 	
