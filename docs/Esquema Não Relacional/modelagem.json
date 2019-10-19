@@ -58,10 +58,10 @@ Contrato: {
 Setor:{
 	_id:int,
 	nome:string,
-	usuarios:[
+	usuarios:[{
 		_id:int,
 		nome:string,
 		login:string,
 		senha:string
-	]
+	}]
 }
