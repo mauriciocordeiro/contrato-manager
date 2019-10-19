@@ -5,15 +5,15 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     dataBaseConfig = require('./database/db');
 
-// Connecting mongoDB
+// Conectando mongoDB
 mongoose.Promise = global.Promise;
 mongoose.connect(dataBaseConfig.db, {
     useNewUrlParser: true
 }).then(() => {
-    console.log('Database connected sucessfully o/ ')
+    console.log('BD conectado!')
 },
     error => {
-        console.log('Could not connected to database -_-: ' + error)
+        console.log('Não foi possível estabelecer conexão om o BD: ' + error)
     }
 )
 

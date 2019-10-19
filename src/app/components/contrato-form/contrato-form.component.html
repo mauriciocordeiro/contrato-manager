@@ -11,8 +11,8 @@
 			</mat-form-field>
 			<mat-form-field fxFlex class="form-field">
 				<mat-label>Empresa</mat-label>
-				<mat-select formControlName="empresa">
-					<mat-option *ngFor="let item of empresas" [value]="item">
+				<mat-select formControlName="_id_empresa">
+					<mat-option *ngFor="let item of empresas" [value]="item._id">
 						{{item.nome_fantasia}}
 					</mat-option>
 				</mat-select>
@@ -70,13 +70,13 @@
 		<mat-card>
 			<mat-card-title class="form-title">Contas</mat-card-title>
 			<mat-card-content fxLayout="column" fxLayoutGap="20px" class="inner-component">
-				<app-conta *ngFor="let conta of contratoForm.value.conta" [conta]="conta"></app-conta>
+				<app-conta *ngFor="let conta of contratoForm.value.contas" [conta]="conta"></app-conta>
 			</mat-card-content>
 		</mat-card>
 		<mat-card style="margin-top: 10px;">
 			<mat-card-title class="form-title">Aditivos</mat-card-title>
 			<mat-card-content fxLayout="column" fxLayoutGap="20px" class="inner-component">
-				<app-aditivo *ngFor="let aditivo of contratoForm.value.aditivo" [aditivo]="aditivo"></app-aditivo>
+				<app-aditivo *ngFor="let aditivo of contratoForm.value.aditivos" [aditivo]="aditivo"></app-aditivo>
 			</mat-card-content>
 		</mat-card>
 	</mat-card-content>

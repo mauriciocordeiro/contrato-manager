@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 // Define collection and schema
 let Empresa = new Schema (
     {
+        _id: { type: Number, required: true },
         cnpj: { type: String, required: true },
         razao_social: { type: String, required: true },
         nome_fantasia: { type: String, required: true },

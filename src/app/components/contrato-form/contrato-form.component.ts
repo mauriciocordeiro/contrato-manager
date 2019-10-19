@@ -62,7 +62,7 @@ export class ContratoFormComponent implements OnInit {
 
 		this.contratoForm = this.formBuilder.group({
 			numero: [contrato.numero, [Validators.required]],
-			empresa: [contrato.empresa, [Validators.required]],
+			_id_empresa: [contrato._id_empresa, [Validators.required]],
 			copia_contrato: [contrato.copia_contrato],
 			tipo_contrato: [contrato.tipo_contrato, [Validators.required]],
 			prestacao: [contrato.prestacao, [Validators.required]],
@@ -71,19 +71,10 @@ export class ContratoFormComponent implements OnInit {
 			data_celebracao_contrato: [contrato.data_celebracao_contrato, [Validators.required]],
 			data_finalizacao_contrato: [contrato.data_finalizacao_contrato],
 			observacoes_contrato: [contrato.observacoes_contrato],
-			aditivo: [contrato.aditivo],
-			conta: [contrato.conta]
+			aditivos: [contrato.aditivos],
+			contas: [contrato.contas]
 		});
 
-		setTimeout(_ => {
-			if (this.idContrato) {
-				this.empresas.forEach(element => {
-					if (element._id == contrato.empresa._id_empresa) {
-						this.contratoForm.patchValue({ empresa: element });
-					}
-				});
-			}
-		}, 300);
 	}
 
 	loadEmpresas() {
@@ -105,12 +96,6 @@ export class ContratoFormComponent implements OnInit {
 		}
 
 		let contrato: Contrato = this.contratoForm.value as Contrato;
-		// reduce data
-		contrato.empresa = {
-			_id_empresa: this.contratoForm.value.empresa._id,
-			cnpj: this.contratoForm.value.empresa.cnpj,
-			razao_social: this.contratoForm.value.empresa.razao_social
-		};
 
 		if (this.idContrato) {
 			this.contratoServices.update(this.idContrato, contrato)
