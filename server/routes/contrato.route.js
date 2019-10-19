@@ -36,7 +36,7 @@ contratoRoute.route('/read-contrato/:id').get((req, res) => {
 contratoRoute.route('/update-contrato/:id').put((req, res, next) => {
     Contrato.findByIdAndUpdate(req.params.id, {
         $set: req.body
-        }, (error, data) => {
+    }, (error, data) => {
         if (error) {
             console.log(error)
             return next(error);
@@ -58,6 +58,44 @@ contratoRoute.route('/delete-contrato/:id').delete((req, res, next) => {
         }
     })
 })
+
+// get contrato
+contratoRoute.route('/read-contrato-empresa').get((req, res) => {
+    Contrato.aggregate([
+        {
+            $lookup: {
+                from: "empresa",
+                localField: "_id_empresa",
+                foreignField: "_id",
+                as: "empresa"
+            }
+        },
+        { $unwind: "$empresa" }
+    ]).then(data => {
+        res.json(data);
+    });
+})
+
+// get um contrato
+contratoRoute.route('/read-contrato-empresa/:id').get((req, res) => {
+    Contrato.aggregate([
+        { 
+            $match: { _id: req.params.id } 
+        }, 
+        {
+            $lookup: {
+                from: "empresa",
+                localField: "_id_empresa",
+                foreignField: "_id",
+                as: "empresa"
+            }
+        },
+        { $unwind: "$empresa" }
+    ]).then(data => {
+        res.json(data);
+    });
+})
+
 
 
 module.exports = contratoRoute;
