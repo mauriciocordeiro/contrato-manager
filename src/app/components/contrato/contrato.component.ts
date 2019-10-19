@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatSnackBar, MatPaginator } from '@angular/material';
-import { Router } from '@angular/router';
 import { ContratoServices } from 'src/app/controllers/contrato.services';
 import { Contrato } from 'src/app/controllers/contrato';
-import { EmpresaServices } from 'src/app/controllers/empresa.services';
 
 @Component({
 	selector: 'app-contrato',
@@ -24,10 +22,8 @@ export class ContratoComponent implements OnInit {
 	displayedColumns: string[] = ['numero', 'empresa', 'cnpj', 'prestacao', 'status_contrato', 'valor_contrato', 'action'];
 
 	constructor(
-		private router: Router,
 		private snackBar: MatSnackBar,
-		private contratoServices: ContratoServices,
-		private empresaServices: EmpresaServices
+		private contratoServices: ContratoServices
 	) { }
 
 	ngOnInit() {
