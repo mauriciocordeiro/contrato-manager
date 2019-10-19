@@ -1,11 +1,10 @@
 Empresa: {
-	_id_empresa:ObjectId,
+	_id:int,
 	cnpj: string,
 	razao_social:string,
 	nome_fantasia:string,
 	email:string,
 	endereco:{
-		_id_endereco:ObjectId,
 		rua:string,
 		numero:int,
 		bairro:string,
@@ -13,34 +12,16 @@ Empresa: {
 		uf:string
 	},
 	telefones:[{
-		_id_telefone:ObjectId,
 		ddd:string,
 		telefone:string
-	}],
-	contratos:[{
-		_id_contrato:ObjectId,
-		tipo_contrato:int,	
-		status_contrato:int,
-		valor_contrato:decimal,
-		numero:string,
-		aditivo:[{
-			_id_aditivo:ObjectId,
-			valor_contrato_aditivo:decimal,
-			data_vencimento_aditivo:date
-		}]
-		
 	}]
 }
 
 
 Contrato: {
-	_id:ObjectId,
+	_id:int,
+	_id_empresa:int,
 	numero: string,
-	empresa:{
-		_id_empresa:ObjectId,
-		cnpj:string,
-		razao_social:string
-	},
 	copia_contrato:string,
 	tipo_contrato:int,
 	prestacao:int,
@@ -50,7 +31,6 @@ Contrato: {
 	data_finalizacao_contrato:date,
 	observacoes_contrato:string,
 	aditivo:[{
-		_id_aditivo:ObjectId
 		copia_contrato_aditivo:string,
 		valor_contrato_aditivo:decimal,
 		data_renovacao:date,
@@ -58,47 +38,29 @@ Contrato: {
 		observacoes:string
 	}],
 	conta: [{
-		_id_conta:ObjectId,
+		copia_conta:string,
 		tipo_conta:int,
 		status_conta:int,
-		valor_conta:decimal
+		data_vencimento_conta:date,
+		data_recebimento_setor:date,
+		data_envio_dof:date,
+		valor_conta:decimal,
+		observacoes_conta:string,
+		pagamento:{
+			data_pagamento_conta:date,
+			valor_pago:decimal,
+			taxa_juros:decimal,
+		}
 	}]
 }
 
-Conta:{
-	_id_conta:ObjectId,
-	_id_contrato:ObjectId,
-	empresa:{
-		_id_empresa:ObjectId,
-		nome_fantasia:string
-	},
-	copia_conta:string,
-	tipo_conta:int,
-	status_conta:int,
-	data_vencimento_conta:date,
-	data_recebimento_setor:date,
-	data_envio_dof:date,
-	valor_conta:decimal,
-	observacoes_conta:string,
-	pagamento:{
-		data_pagamento_conta:date,
-		valor_pago:decimal,
-		taxa_juros:decimal,
-	}
-}
-
-Usuario:{
-	_id_usuario:ObjectId,
-	nome:string,
-	login:string,
-	senha:string,
-	setor:{
-		_id_setor:ObjectId,
-		nome:string,
-	}
-}
-
 Setor:{
-	_id_setor:ObjectId,
-	nome:string
+	_id:int,
+	nome:string,
+	usuarios:[
+		_id:int,
+		nome:string,
+		login:string,
+		senha:string
+	]
 }

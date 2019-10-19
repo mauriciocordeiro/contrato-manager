@@ -1,0 +1,10 @@
+1 - Buscar todas os contratos de uma empresa;
+2 - Buscar debito e receita do mês levando em consideração todas as contas de contratos ativos, agrupando por contas pagae  e total
+3 - Buscar data de vencimento do contrato levando em consideração seus aditivos;
+4 - Buscar todos os contratos que estão para vencer em até 30 dias;
+5 - Buscar todas as contas que estão para vencer em até 7 dias;
+6 - Buscar média dos valores gastos/recebidos no último mês;
+7 - Buscar por mês (no último ano) quando foi gasto e recebido;
+8 - Verificar nos últimos seis meses, qual foi o percentual a mais pago nas contas;
+9 - Buscar percentual de contas que foram pagas em atraso nos últimos seis meses;
+10 - Qual o total pago em aditivos no último ano;
