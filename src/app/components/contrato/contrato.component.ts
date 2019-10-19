@@ -37,24 +37,15 @@ export class ContratoComponent implements OnInit {
 	}
 
 	loadContratos() {
-		this.contratoServices.readAll().subscribe(result => {
+		this.contratoServices.getAll().subscribe(result => {
 			this.contratoData = result;
 
-			// A quick XGH don't hurts anybody
+			// A quick XGH don't hurts anybody --------------------------------
 			this.contratoData.forEach(element => {
-				// TODO: aggregate $lookup
 				element.prestacaoLabel = this.prestacao[element.prestacao-1 | 0].label
 				element.statusLabel = this.stContrato[element.status_contrato-1 | 0].label
-				debugger
-				if(element._id_empresa)  {
-					this.empresaServices.read(element._id_empresa)
-						.subscribe(data => {
-							debugger
-							element.empresa = data;
-						});
-				}
-
 			});
+			// ----------------------------------------------------------------
 
 			this.dataSource = new MatTableDataSource<Contrato>(this.contratoData);
 			setTimeout(() => {

@@ -1,14 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Conta } from 'src/app/controllers/conta';
+import { FormGroup } from '@angular/forms';
 
 @Component({
-	selector: 'app-conta',
-	templateUrl: './conta.component.html',
-	styleUrls: ['./conta.component.scss']
+	selector: 'app-conta-form',
+	templateUrl: './conta-form.component.html',
+	styleUrls: ['./conta-form.component.scss']
 })
-export class ContaComponent implements OnInit {
+export class ContaFormComponent implements OnInit {
 
 	@Input('conta') conta: Conta;
+	@Input('formContrato') formContrato : FormGroup;
 
 	stConta:any[] = Conta.stConta;
 	tpConta:any[] = Conta.tpConta;
@@ -16,9 +18,6 @@ export class ContaComponent implements OnInit {
 	constructor() { }
 
 	ngOnInit() {
-
-		this.conta.tipo_conta = this.conta.tipo_conta || 1;
-		this.conta.status_conta = this.conta.status_conta || 1; 
 
 	}
 

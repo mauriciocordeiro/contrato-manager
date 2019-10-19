@@ -46,6 +46,7 @@ Contrato: {
 		data_envio_dof:date,
 		valor_conta:decimal,
 		observacoes_conta:string,
+		_id_usuario: int,
 		pagamento:{
 			data_pagamento_conta:date,
 			valor_pago:decimal,
@@ -57,10 +58,10 @@ Contrato: {
 Setor:{
 	_id:int,
 	nome:string,
-	usuarios:[
+	usuarios:[{
 		_id:int,
 		nome:string,
 		login:string,
 		senha:string
-	]
+	}]
 }

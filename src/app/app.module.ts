@@ -14,6 +14,8 @@ import { ContratoServices } from './controllers/contrato.services';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSortModule } from '@angular/material';
 import { AditivoComponent } from './components/aditivo/aditivo.component';
+import { ContaFormComponent } from './components/conta-form/conta-form.component';
+import { AditivoFormComponent } from './components/aditivo-form/aditivo-form.component';
 
 @NgModule({
 	declarations: [
@@ -22,7 +24,9 @@ import { AditivoComponent } from './components/aditivo/aditivo.component';
 		ContaComponent,
 		ContratoComponent,
 		HomeComponent,
-		AditivoComponent
+		AditivoComponent,
+		ContaFormComponent,
+		AditivoFormComponent
 	],
 	imports: [
 		BrowserModule,
@@ -40,6 +44,10 @@ import { AditivoComponent } from './components/aditivo/aditivo.component';
 		{ provide: LOCALE_ID, useValue: 'pt-BR' }
 	],
 	bootstrap: [AppComponent],
-	schemas: [CUSTOM_ELEMENTS_SCHEMA]
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+	entryComponents: [
+		AditivoFormComponent, 
+		ContaFormComponent
+	]
 })
 export class AppModule { }

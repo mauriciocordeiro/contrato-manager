@@ -2,10 +2,14 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { Contrato } from 'src/app/controllers/contrato';
 import { ContratoServices } from 'src/app/controllers/contrato.services';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { EmpresaServices } from 'src/app/controllers/empresa.services';
 import { Empresa } from 'src/app/controllers/empresa';
+import { ContaComponent } from '../conta/conta.component';
+import { ContaFormComponent } from '../conta-form/conta-form.component';
+import { Conta } from 'src/app/controllers/conta';
+import { AditivoFormComponent } from '../aditivo-form/aditivo-form.component';
 
 @Component({
 	selector: 'app-contrato-form',
@@ -26,11 +30,11 @@ export class ContratoFormComponent implements OnInit {
 
 	constructor(
 		public formBuilder: FormBuilder,
-		private router: Router,
 		private actRoute: ActivatedRoute,
 		private snackBar: MatSnackBar,
 		private contratoServices: ContratoServices,
-		private empresaServices: EmpresaServices
+		private empresaServices: EmpresaServices,
+		public dialog: MatDialog
 	) {
 
 		const idContrato = this.actRoute.snapshot.paramMap.get('id');
@@ -109,7 +113,12 @@ export class ContratoFormComponent implements OnInit {
 		} else {
 			this.contratoServices.readAll().subscribe(list => {
 
-				contrato._id = (list as Array<any>)[(list as Array<any>).length-1]._id + 1;
+				if (list && (list as []).length > 0) {
+					contrato._id = (list as Array<any>)[(list as Array<any>).length - 1]._id + 1;
+				} else {
+					contrato._id = 1;
+				}
+
 
 				this.contratoServices.create(contrato)
 					.subscribe(result => {
@@ -128,7 +137,13 @@ export class ContratoFormComponent implements OnInit {
 	}
 
 
-	onClickAddConta() {
-		this.contratoForm.value.conta.push({})
+	addConta() {
+		const dialogRef = this.dialog.open(ContaFormComponent, 
+			{ width:'50%', height: '50%' });
+	}
+
+	addAditivo() {
+		const dialogRef = this.dialog.open(AditivoFormComponent, 
+			{ width:'50%', height: '50%' });
 	}
 }

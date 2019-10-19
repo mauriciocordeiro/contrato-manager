@@ -40,6 +40,17 @@ export class ContratoServices {
             );
     }
 
+    getAll() {
+        const url = `${this.endpoint}/read-contrato-empresa/`;
+        return this.http.get(url, { headers: this.headers })
+            .pipe(
+                map((res: Response) => {
+                    return res || {}
+                }),
+                catchError(this.errorHandler)
+            );
+    }
+
     // UPDATE =================================================================
     update(id, data: Contrato): Observable<any> {
         const url = `${this.endpoint}/update-contrato/${id}`;
