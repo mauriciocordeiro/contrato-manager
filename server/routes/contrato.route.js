@@ -67,4 +67,5 @@ contratoRoute.route('/delete-contrato/:id').delete((req, res, next) => {
     })
 })
 
+
 module.exports = contratoRoute;

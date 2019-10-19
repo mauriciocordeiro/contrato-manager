@@ -3,6 +3,7 @@ import { MatTableDataSource, MatSort, MatSnackBar, MatPaginator } from '@angular
 import { Router } from '@angular/router';
 import { ContratoServices } from 'src/app/controllers/contrato.services';
 import { Contrato } from 'src/app/controllers/contrato';
+import { EmpresaServices } from 'src/app/controllers/empresa.services';
 
 @Component({
 	selector: 'app-contrato',
@@ -25,7 +26,8 @@ export class ContratoComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private snackBar: MatSnackBar,
-		private contratoServices: ContratoServices
+		private contratoServices: ContratoServices,
+		private empresaServices: EmpresaServices
 	) { }
 
 	ngOnInit() {
@@ -40,10 +42,18 @@ export class ContratoComponent implements OnInit {
 
 			// A quick XGH don't hurts anybody
 			this.contratoData.forEach(element => {
-				element.empresaNome = element.empresa.razao_social,
-				element.cnpj = element.empresa.cnpj,
+				// TODO: aggregate $lookup
 				element.prestacaoLabel = this.prestacao[element.prestacao-1 | 0].label
 				element.statusLabel = this.stContrato[element.status_contrato-1 | 0].label
+				debugger
+				if(element._id_empresa)  {
+					this.empresaServices.read(element._id_empresa)
+						.subscribe(data => {
+							debugger
+							element.empresa = data;
+						});
+				}
+
 			});
 
 			this.dataSource = new MatTableDataSource<Contrato>(this.contratoData);

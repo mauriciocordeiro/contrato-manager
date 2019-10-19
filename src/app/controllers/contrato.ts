@@ -1,3 +1,5 @@
+import { Conta } from './conta';
+
 export class Contrato {
 
     public static TP_LICITATORIO: Number = 1;
@@ -27,7 +29,7 @@ export class Contrato {
 
     public _id: Number = void(0);
     public numero: String = void(0);
-    public empresa: EmpresaInterface = void(0);
+    public _id_empresa: Number = void(0);
     public copia_contrato: any = void(0);
     public tipo_contrato: Number = void(0);
     public prestacao: Number = void(0);
@@ -37,7 +39,7 @@ export class Contrato {
     public data_finalizacao_contrato: Date = void(0);
     public observacoes_contrato: any = void(0);
     public aditivo: AditivoInterface[] = void(0);
-    public conta: ContaInterface[] = void(0);
+    public conta: Conta[] = void(0);
     
     constructor(){ }
 }
@@ -55,11 +57,4 @@ export interface AditivoInterface {
     data_renovacao: Date,
     data_vencimento: Date,
     observacoes: any
-}
-
-export interface ContaInterface {
-    _id: String,
-    tipo_conta: Number,
-    status_conta: Number,
-    valor_conta: Number
 }

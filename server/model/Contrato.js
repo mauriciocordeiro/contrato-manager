@@ -11,9 +11,9 @@ function deleteEmpty(v) {
 // Define collection and schema
 let Contrato = new Schema(
     {
-        _id: { type: Number },
+        _id: { type: Number, required: true },
+        _id_empresa: { type: Number, required: true },
         numero: { type: String, required: true },
-        empresa: { type: Object, required: true },
         copia_contrato: { type: Buffer, set: deleteEmpty },
         tipo_contrato: { type: Number, required: true },
         prestacao: { type: Number, required: true },
