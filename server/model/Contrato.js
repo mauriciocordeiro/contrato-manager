@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
+function deleteEmpty(v) {
+    if (v == null) {
+        return undefined;
+    }
+    return v;
+}
+
 // Define collection e schema
 let Contrato = new Schema(
     {
@@ -21,12 +29,5 @@ let Contrato = new Schema(
         collection: 'contrato'
     }
 )
-
-function deleteEmpty(v) {
-    if (v == null) {
-        return undefined;
-    }
-    return v;
-}
 
 module.exports = mongoose.model('Contrato', Contrato)
