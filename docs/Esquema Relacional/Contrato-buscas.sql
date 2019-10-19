@@ -22,4 +22,42 @@ WHERE id_contrato = ?
 ORDER BY ADI.data_vencimento
 
 -- 4 Buscar todos os contratos que estão para vencer em até 30 dias
+SELECT * FROM contrato WHERE CONTR.data_vencimento + interval 30 day >= now()
 
+-- 5 Buscar todas as contas que estão para vencer em até 7 dias;
+SELECT * FROM conta WHERE CON.data_vencimento + interval 7 day >= now()
+
+-- 6 Buscar média dos valores gastos/recebidos dos ultimos trinta dias;
+SELECT CON.tipo_conta, AVG(PAG.valor_pago)
+FROM pagamento PAG
+JOIN conta CON ON (PAG.id_conta = CON.id_conta)
+WHERE PAG.data_pagamento_conta >= now() - interval 30 day
+GROUP BY CON.tipo_conta
+
+-- 7 Buscar por mês (no último ano) quanto foi gasto e recebido;
+SELECT CON.tipo_conta, MONTH(PAG.data_pagamento_conta), SUM(PAG.valor_pago)
+FROM pagamento PAG
+JOIN conta CON ON (PAG.id_conta = CON.id_conta)
+WHERE YEAR(PAG.data_pagamento_conta) = YEAR(now())
+
+-- 8 Buscar percentual de contas que foram pagas em atraso nos últimos doze meses;
+SELECT MONTH(PAG.data_pagamento_conta), ((COUNT(*) / (SELECT COUNT(*) FROM pagamento PAG_2 
+			JOIN CON_2 ON (PAG_2.id_conta = CON_2.id_conta) 
+		  WHERE PAG_2.data_pagamento_conta >= now() - interval 365 day
+		  GROUP BY MONTH(PAG_2.data_pagamento_conta)))*100) AS PORCENTAGEM_CONTAS_ATRASO
+FROM pagamento PAG
+JOIN conta CON ON (PAG.id_conta = CON.id_conta)
+WHERE PAG.data_pagamento_conta >= now() - interval 365 day
+  AND PAG.taxa_juros > 0
+GROUP BY MONTH(PAG.data_pagamento_conta)
+
+-- 9 Qual o total pago em aditivos no último ano
+SELECT SUM(valor_contrato_aditivo) FROM aditivo
+WHERE YEAR(data_renovacao) = YEAR(now())
+
+-- 10 Empresas com conta em aberto, mostrando o telefone de contato
+SELECT EMP.razao_social, (SELECT GROUP_CONCAT(TEL.numero SEPARATOR ', ') 
+  FROM telefone TEL
+  WHERE TEL.id_empresa = CON.id_empresa) AS telefones  FROM conta CON
+JOIN empresa EMP ON (CON.id_empresa = EMP.id_empresa)
+WHERE NOT EXISTS (SELECT * FROM pagamento PAG WHERE CON.id_conta = PAG.id_conta)
