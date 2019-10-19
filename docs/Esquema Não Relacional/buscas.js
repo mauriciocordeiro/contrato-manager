@@ -8,15 +8,12 @@ db.contrato.aggregate([
 	{ 
 		$unwind: "$conta"
 	},
-	{ 
-		$unwind: "$pagamento"
-	},
 	{
 		$project: {
 			conta: 1,
 			status_contrato: 1,
-			mes_conta: { $month: "$data_pagamento_conta" },
-			ano_conta: { $year: "$data_pagamento_conta" },
+			mes_conta: { $month: "$pagamento.data_pagamento_conta" },
+			ano_conta: { $year: "$data_pagamento_conta" }
 		}
 	},
 	{
@@ -30,7 +27,7 @@ db.contrato.aggregate([
 	},
 	{
 		$group:{
-			_id: "$tipo_conta", total:{$sum: "$valor_conta"}, pago: {$sum: "$valor_pago"}
+			_id: "$tipo_conta", total:{$sum: "$valor_conta"}, pago: {$sum: "$pagamento.valor_pago"}
 		}
 	}
 ]);
@@ -88,18 +85,15 @@ db.contrato.aggregate([
 	{ 
 		$unwind: "$conta"
 	},
-	{ 
-		$unwind: "$pagamento"
-	},
 	{
 		$project: {
-			dias_vencimento: {$divide : [{$subtract: ["$data_pagamento_conta", new Date()]}, 86400000]}
+			dias: {$divide : [{$subtract: ["$pagamento.data_pagamento_conta", new Date()]}, 86400000]}
 		}
 	},
 	{
 		$match: {
 			$lte: [ 
-				  dias_vencimento, 
+				  dias, 
 				  30
 			]
 		}
@@ -112,3 +106,70 @@ db.contrato.aggregate([
 	}
 ]);
 
+//7 Buscar por mês (no último ano) quanto foi gasto e recebido;
+db.contrato.aggregate([
+	{ 
+		$unwind: "$conta"
+	},
+	{
+		$project: {
+			tipo_pago: 1,
+			valor_pago: 1,
+			ano_atual: { $year: new Date() },
+			mes_conta: { $month: "$pagamento.data_pagamento_conta" },
+			ano_conta: { $year: "$pagamento.data_pagamento_conta" }
+		}
+	},
+	{
+		$match: {
+			$eq:["$ano_conta", "$ano_atual"]
+		}
+	},
+	{
+		$group:{
+			_id: {tipo_conta: "$tipo_conta", mes: "$mes_conta"}, 
+			total:{$sum: "$valor_pago"}
+		}
+	}
+]);
+
+//8 Buscar percentual de contas que foram pagas em atraso nos últimos doze meses;
+
+//9 Qual o total pago em aditivos no último ano
+db.contrato.aggregate([
+	{ 
+		$unwind: "$aditivo"
+	},
+	{
+		$project: {
+			valor_contrato_aditivo: 1,
+			ano_atual: { $year: new Date() },
+			ano_aditivo: { $year: "$data_renovacao" }
+		}
+	},
+	{
+		$match: {
+			$eq:["$ano_conta", "$ano_atual"]
+		}
+	},
+	{
+		$group:{
+			_id: null, 
+			total:{$sum: "$valor_contrato_aditivo"}
+		}
+	}
+]);
+
+
+//10 Empresas com conta em aberto, mostrando o telefone de contato
+db.contrato.aggregate([
+    { $match: { conta: { "$elemMatch": { pagamento: { "$exists": false } } } } },
+    { $project: {
+        conta: { $filter: { 
+            input: "$conta", 
+            as: "item", 
+            cond: { $eq: [ { $type: "$$item.pagamento" }, "missing" ] }
+        } },
+		telefone: 1
+    } }
+]);

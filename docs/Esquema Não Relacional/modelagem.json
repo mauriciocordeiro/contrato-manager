@@ -46,6 +46,7 @@ Contrato: {
 		data_envio_dof:date,
 		valor_conta:decimal,
 		observacoes_conta:string,
+		_id_usuario: int,
 		pagamento:{
 			data_pagamento_conta:date,
 			valor_pago:decimal,
