@@ -75,8 +75,8 @@ export class ContratoFormComponent implements OnInit {
 			data_celebracao_contrato: [contrato.data_celebracao_contrato, [Validators.required]],
 			data_finalizacao_contrato: [contrato.data_finalizacao_contrato],
 			observacoes_contrato: [contrato.observacoes_contrato],
-			aditivos: [contrato.aditivos],
-			contas: [contrato.contas]
+			aditivos: [contrato.aditivo],
+			contas: [contrato.conta]
 		});
 
 	}

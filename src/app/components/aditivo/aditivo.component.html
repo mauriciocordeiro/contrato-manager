@@ -7,13 +7,13 @@
       </div>
       <div fxFlex fxLayout="column" fxLayoutGap="10px">
         <span class="label">Renovação</span>
-        <span class="value">{{ aditivo.data_vencimento }}</span>
+        <span class="value">{{ aditivo.data_vencimento | date: 'dd/MM/yyyy' }}</span>
       </div>
       <div fxFlex fxLayout="column" fxLayoutGap="10px">
         <span class="label">Vencimento</span>
-        <span class="value">{{ aditivo.data_vencimento }}</span>
+        <span class="value">{{ aditivo.data_vencimento | date: 'dd/MM/yyyy' }}</span>
       </div>
     </div>
   </mat-card-content>
-  <mat-divider [inset]="true"></mat-divider>
 </mat-card>
+<mat-divider></mat-divider>

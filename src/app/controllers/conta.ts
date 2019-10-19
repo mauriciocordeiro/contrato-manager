@@ -21,7 +21,7 @@ export class Conta {
     public data_envio_dof: Date = void(0);
     public valor_conta: Number = void(0);
     public observacoes_conta: any = void(0);
-    public pagamento: Pagamento = void(0);
+    public pagamento: Pagamento[] = void(0);
     
     constructor(){}
 }

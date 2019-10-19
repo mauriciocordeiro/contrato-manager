@@ -22,8 +22,8 @@ let Contrato = new Schema(
         data_celebracao_contrato: { type: Date, required: true },
         data_finalizacao_contrato: { type: Date, set: deleteEmpty },
         observacoes_contrato: { type: String, set: deleteEmpty },
-        aditivos: { type: Array, set: deleteEmpty },
-        contas: { type: Array, set: deleteEmpty }
+        aditivo: { type: Array, set: deleteEmpty },
+        conta: { type: Array, set: deleteEmpty }
     },
     {
         collection: 'contrato'

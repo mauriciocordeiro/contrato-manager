@@ -66,26 +66,30 @@
 				<textarea matInput placeholder="Observações" formControlName="observacoes_contrato"></textarea>
 			</mat-form-field>
 		</div>
-		
-		<mat-card>
-			<mat-card-title class="form-title">Contas</mat-card-title>
-			<mat-card-content fxLayout="column" fxLayoutGap="20px" class="inner-component">
-				<app-conta *ngFor="let conta of contratoForm.value.contas" [conta]="conta"></app-conta>
-			</mat-card-content>
-		</mat-card>
-		<mat-card style="margin-top: 10px;">
-			<mat-card-title class="form-title">Aditivos</mat-card-title>
-			<mat-card-content fxLayout="column" fxLayoutGap="20px" class="inner-component">
-				<app-aditivo *ngFor="let aditivo of contratoForm.value.aditivos" [aditivo]="aditivo"></app-aditivo>
-			</mat-card-content>
-		</mat-card>
+		<div fxFlex fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+			<mat-card class="embedded-document">
+				<mat-card-title class="form-title">Contas</mat-card-title>
+				<mat-card-content fxLayout="column" class="inner-component">
+					<app-conta *ngFor="let conta of contratoForm.value.contas" [conta]="conta"></app-conta>
+				</mat-card-content>
+			</mat-card>
+			<mat-card  class="embedded-document">
+				<mat-card-title class="form-title">Aditivos</mat-card-title>
+				<mat-card-content fxLayout="column" class="inner-component">
+					<app-aditivo *ngFor="let aditivo of contratoForm.value.aditivos" [aditivo]="aditivo"></app-aditivo>
+				</mat-card-content>
+			</mat-card>
+		</div>
+
 	</mat-card-content>
 	<hr>
 	<mat-card-actions fxLayout="row" fxLayoutGap="20px">
 		<button mat-flat-button color="accent" type="button" (click)="addConta()">
-			<mat-icon>add</mat-icon>Conta</button>
+			<mat-icon>add</mat-icon>Conta
+		</button>
 		<button mat-flat-button color="accent" type="button" (click)="addAditivo()">
-				<mat-icon>add</mat-icon>Aditivo</button>		
+			<mat-icon>add</mat-icon>Aditivo
+		</button>
 		<span fxFlex></span>
 		<button mat-button color="primary" type="button" (click)="cancel()">Cancelar</button>
 		<button mat-raised-button color="primary" type="button" (click)="submit()">

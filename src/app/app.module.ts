@@ -41,7 +41,7 @@ import { AditivoFormComponent } from './components/aditivo-form/aditivo-form.com
 	],
 	providers: [
 		ContratoServices,
-		{ provide: LOCALE_ID, useValue: 'pt-BR' }
+		//{ provide: LOCALE_ID, useValue: 'pt-BR' }
 	],
 	bootstrap: [AppComponent],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
