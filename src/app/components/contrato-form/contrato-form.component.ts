@@ -109,7 +109,12 @@ export class ContratoFormComponent implements OnInit {
 		} else {
 			this.contratoServices.readAll().subscribe(list => {
 
-				contrato._id = (list as Array<any>)[(list as Array<any>).length-1]._id + 1;
+				if(list && (list as []).length > 0) {
+					contrato._id = (list as Array<any>)[(list as Array<any>).length-1]._id + 1;
+				} else {
+					contrato._id = 1;
+				}
+				
 
 				this.contratoServices.create(contrato)
 					.subscribe(result => {
