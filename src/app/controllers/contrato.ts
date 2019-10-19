@@ -38,8 +38,8 @@ export class Contrato {
     public data_celebracao_contrato: Date = void(0);
     public data_finalizacao_contrato: Date = void(0);
     public observacoes_contrato: any = void(0);
-    public aditivo: AditivoInterface[] = void(0);
-    public conta: Conta[] = void(0);
+    public aditivos: AditivoInterface[] = void(0);
+    public contas: Conta[] = void(0);
     
     constructor(){ }
 }
