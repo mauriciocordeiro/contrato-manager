@@ -23,11 +23,11 @@
 			</ng-container>
 			<ng-container matColumnDef="prestacao">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> Prestação </th>
-				<td mat-cell *matCellDef="let item"> {{ prestacao[item.prestacao-1].label }} </td>
+				<td mat-cell *matCellDef="let item"> {{ item.prestacaoLabel }} </td>
 			</ng-container>
 			<ng-container matColumnDef="status_contrato">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-				<td mat-cell *matCellDef="let item"> {{ stContrato[item.status_contrato-1].label }} </td>
+				<td mat-cell *matCellDef="let item"> {{ item.statusLabel }} </td>
 			</ng-container>
 			<ng-container matColumnDef="valor_contrato">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>

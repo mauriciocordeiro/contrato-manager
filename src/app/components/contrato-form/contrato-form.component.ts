@@ -76,12 +76,12 @@ export class ContratoFormComponent implements OnInit {
 		});
 
 		setTimeout(_ => {
-			if(this.idContrato) {
+			if (this.idContrato) {
 				this.empresas.forEach(element => {
-					if(element._id == contrato.empresa._id_empresa) {
-						this.contratoForm.patchValue({empresa: element});
+					if (element._id == contrato.empresa._id_empresa) {
+						this.contratoForm.patchValue({ empresa: element });
 					}
-				});			
+				});
 			}
 		}, 300);
 	}
@@ -112,23 +112,28 @@ export class ContratoFormComponent implements OnInit {
 			razao_social: this.contratoForm.value.empresa.razao_social
 		};
 
-		if(this.idContrato) {
+		if (this.idContrato) {
 			this.contratoServices.update(this.idContrato, contrato)
 				.subscribe(response => {
 					this.snackBar.open('Salvo com sucesso!', 'OK', {
 						duration: 3000,
 						panelClass: ['success-snackbar']
 					});
-	
+
 				});
 		} else {
-			this.contratoServices.create(contrato)
-			.subscribe(result => {
-				this.snackBar.open('Salvo com sucesso!', 'OK', {
-					duration: 3000,
-					panelClass: ['success-snackbar']
-				});
-				this.buildForm();
+			this.contratoServices.readAll().subscribe(list => {
+
+				contrato._id = (list as Array<any>)[(list as Array<any>).length-1]._id + 1;
+
+				this.contratoServices.create(contrato)
+					.subscribe(result => {
+						this.snackBar.open('Salvo com sucesso!', 'OK', {
+							duration: 3000,
+							panelClass: ['success-snackbar']
+						});
+						this.buildForm();
+					});
 			});
 		}
 	}

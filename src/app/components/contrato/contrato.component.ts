@@ -41,9 +41,9 @@ export class ContratoComponent implements OnInit {
 			// A quick XGH don't hurts anybody
 			this.contratoData.forEach(element => {
 				element.empresaNome = element.empresa.razao_social,
-					element.cnpj = element.empresa.cnpj,
-					element.prestacaoLabel = this.prestacao[element.prestacao - 1].label
-				element.statusLabel = this.stContrato[element.status_contrato - 1].label
+				element.cnpj = element.empresa.cnpj,
+				element.prestacaoLabel = this.prestacao[element.prestacao-1 | 0].label
+				element.statusLabel = this.stContrato[element.status_contrato-1 | 0].label
 			});
 
 			this.dataSource = new MatTableDataSource<Contrato>(this.contratoData);
