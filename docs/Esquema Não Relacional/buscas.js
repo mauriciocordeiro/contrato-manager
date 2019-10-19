@@ -8,26 +8,29 @@ db.contrato.aggregate([
 	{ 
 		$unwind: "$conta"
 	},
+        { 
+		$unwind: "$conta.pagamento"
+	},
 	{
 		$project: {
 			conta: 1,
 			status_contrato: 1,
-			mes_conta: { $month: "$pagamento.data_pagamento_conta" },
-			ano_conta: { $year: "$data_pagamento_conta" }
+			mes_conta: { $month: "$conta.pagamento.data_pagamento_conta" },
+			ano_conta: { $year: "$conta.pagamento.data_pagamento_conta" }
 		}
 	},
 	{
 		$match: {
 			$and: [ 
 				  {status_contrato: 1}, 
-				  {mes_conta: ?}, 
-				  {ano_conta: ?}
+				  {mes_conta: 5}, 
+				  {ano_conta: 2019}
 			]
 		}
 	},
 	{
 		$group:{
-			_id: "$tipo_conta", total:{$sum: "$valor_conta"}, pago: {$sum: "$pagamento.valor_pago"}
+			_id: "$conta.tipo_conta", total:{$sum: "$conta.valor_conta"}, pago: {$sum: "$conta.pagamento.valor_pago"}
 		}
 	}
 ]);
