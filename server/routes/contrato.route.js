@@ -80,7 +80,7 @@ contratoRoute.route('/read-contrato-empresa').get((req, res) => {
 contratoRoute.route('/read-contrato-empresa/:id').get((req, res) => {
     Contrato.aggregate([
         { 
-            $match: { "_id": req.params.id } 
+            $match: { "_id": Number(req.params.id) } 
         }, 
         {
             $lookup: {
