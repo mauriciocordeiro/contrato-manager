@@ -18,7 +18,3 @@ Implementado com a [stack MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bun
 **_back-end_**
 * Em _/server_: `npm start`
 
----
-
-<sub>referência [Angular 8 Mean stack Angular Material](https://github.com/SinghDigamber/Angular8MeanstackAngularMaterial/)
-</sub>
