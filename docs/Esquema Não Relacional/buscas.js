@@ -30,7 +30,7 @@ db.contrato.aggregate([
 	},
 	{
 		$group:{
-			_id: "$tipo_conta", total:{$sum: "$valor_conta"}, pago: {$sum: "$pagamento.valor_pago"}
+			_id: "$tipo_conta", total:{$sum: "$valor_conta"}, pago: {$sum: "$valor_pago"}
 		}
 	}
 ]);
@@ -107,8 +107,7 @@ db.contrato.aggregate([
 	{
 		$group:{
 			_id: "$tipo_conta", 
-			total:{$sum: "$valor_conta"}, 
-			pago: {$sum: "$pagamento.valor_pago"}
+			media:{$avg: "$valor_pago"}
 		}
 	}
 ]);
