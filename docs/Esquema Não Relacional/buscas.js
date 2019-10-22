@@ -55,33 +55,75 @@ db.contrato.aggregate([
 ]);
 
 // 4 Buscar todos os contratos que estão para vencer em até 30 dias
-db.contrato.aggregate([
-	{
-		$project: {
-			dias_vencimento: {$divide : [{$subtract: ["$data_vencimento", new Date()]}, 86400000]}
-		}
-	},
-	{
-		$match: {$lte: ["$dias_vencimento", 30]}
-	}
+db.contrato.aggregate([ 
+
+	{$project:{
+
+		numero: 1,
+
+		data_finalizacao: 1,
+
+		valor_contrato: 1,
+
+		nDias:{$subtract: [{$dayOfYear: "$data_finalizacao"}, {$dayOfYear: new Date()}]}}},
+
+	{$project:{
+
+		numContrato:"$numero",
+
+		nDias:1,
+
+		valor: "$valor_contrato",
+
+		resp: {$and:[{$eq: [{$year: "$data_finalizacao"},{$year: new Date()}]},
+
+					{$gte: ["$nDias",1]},
+
+					{$lte: ["$nDias",30]}]}}},
+
+	{$match: {resp:true}},
+
+	{$project: {resp:0, _id:0}}
 
 ]);
 
 // 5 Buscar todas as contas que estão para vencer em até 7 dias;
 db.contrato.aggregate([
-	{
-		$unwind: "$conta"
-	},
-	{
-		$project: {
-			dias_vencimento: {$divide : [{$subtract: ["$data_vencimento_conta", new Date()]}, 86400000]}
-		}
-	},
-	{
-		$match: {$lte: ["$dias_vencimento", 7]}
-	}
+
+	{$unwind:"$conta"},
+
+	{$project:{
+
+		numero: 1,
+
+		"conta.data_vencimento":1,
+
+		"conta.valor_conta":1,
+
+		nDias:{$subtract: [{$dayOfYear: "$conta.data_vencimento"}, {$dayOfYear: new Date()}]}}},
+
+	{$project:{
+
+		numContrato:"$numero",
+
+		nDias:1,
+
+		valor:"$conta.valor_conta",
+
+	   valor_conta:1,
+
+		resp: {$and:[{$eq: [{$year: "$conta.data_vencimento"},{$year: new Date()}]},
+
+					{$gte: ["$nDias",1]},
+
+					{$lte: ["$nDias",7]}]}}},
+
+	{$match: {resp:true}},
+
+	{$project: {resp:0, _id: 0}}
 
 ]);
+
 
 // 6 Buscar média dos valores gastos/recebidos dos ultimos trinta dias;
 db.contrato.aggregate([
