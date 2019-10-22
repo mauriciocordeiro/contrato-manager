@@ -54,45 +54,76 @@ db.contrato.aggregate([
 	
 ]);
 
-// 4 Buscar todos os contratos que est„o para vencer em atÈ 30 dias
-
-    db.contrato.aggregate([ 
-        {$project:{
-            numero: 1,
-            data_finalizacao: 1,
-            valor_contrato: 1,
-            nDias:{$subtract: [{$dayOfYear: "$data_finalizacao"}, {$dayOfYear: new Date()}]}}},
-        {$project:{
-            numContrato:"$numero",
-            nDias:1,
-            valor: "$valor_contrato",
-            resp: {$and:[{$eq: [{$year: "$data_finalizacao"},{$year: new Date()}]},
-                        {$gte: ["$nDias",1]},
-                        {$lte: ["$nDias",30]}]}}},
-        {$match: {resp:true}},
-        {$project: {resp:0, _id:0}}
-    ]);
-
-
-// 5 Buscar todas as contas que est„o para vencer em atÈ 7 dias;
-    db.contrato.aggregate([
-        {$unwind:"$conta"},
-        {$project:{
-            numero: 1,
-            "conta.data_vencimento":1,
-            "conta.valor_conta":1,
-            nDias:{$subtract: [{$dayOfYear: "$conta.data_vencimento"}, {$dayOfYear: new Date()}]}}},
-        {$project:{
-            numContrato:"$numero",
-            nDias:1,
-            valor:"$conta.valor_conta",
-           valor_conta:1,
-            resp: {$and:[{$eq: [{$year: "$conta.data_vencimento"},{$year: new Date()}]},
-                        {$gte: ["$nDias",1]},
-                        {$lte: ["$nDias",7]}]}}},
-        {$match: {resp:true}},
-        {$project: {resp:0, _id: 0}}
-    ]);
+// 4 Buscar todos os contratos que est√£o para vencer em at√© 30 dias
+db.contrato.aggregate([ 
+
+	{$project:{
+
+		numero: 1,
+
+		data_finalizacao: 1,
+
+		valor_contrato: 1,
+
+		nDias:{$subtract: [{$dayOfYear: "$data_finalizacao"}, {$dayOfYear: new Date()}]}}},
+
+	{$project:{
+
+		numContrato:"$numero",
+
+		nDias:1,
+
+		valor: "$valor_contrato",
+
+		resp: {$and:[{$eq: [{$year: "$data_finalizacao"},{$year: new Date()}]},
+
+					{$gte: ["$nDias",1]},
+
+					{$lte: ["$nDias",30]}]}}},
+
+	{$match: {resp:true}},
+
+	{$project: {resp:0, _id:0}}
+
+]);
+
+// 5 Buscar todas as contas que est√£o para vencer em at√© 7 dias;
+db.contrato.aggregate([
+
+	{$unwind:"$conta"},
+
+	{$project:{
+
+		numero: 1,
+
+		"conta.data_vencimento":1,
+
+		"conta.valor_conta":1,
+
+		nDias:{$subtract: [{$dayOfYear: "$conta.data_vencimento"}, {$dayOfYear: new Date()}]}}},
+
+	{$project:{
+
+		numContrato:"$numero",
+
+		nDias:1,
+
+		valor:"$conta.valor_conta",
+
+	   valor_conta:1,
+
+		resp: {$and:[{$eq: [{$year: "$conta.data_vencimento"},{$year: new Date()}]},
+
+					{$gte: ["$nDias",1]},
+
+					{$lte: ["$nDias",7]}]}}},
+
+	{$match: {resp:true}},
+
+	{$project: {resp:0, _id: 0}}
+
+]);
+
 
 // 6 Buscar m√©dia dos valores gastos/recebidos dos ultimos trinta dias;
 db.contrato.aggregate([
@@ -125,29 +156,30 @@ db.contrato.aggregate([
 	{ 
 		$unwind: "$conta"
 	},
-	{
+        { 
+		$unwind: "$conta.pagamento"
+	},
+        {
 		$project: {
-			tipo_pago: 1,
-			valor_pago: 1,
+			"conta.pagamento.tipo_conta": 1,
+			"conta.pagamento.valor_pago": 1,
 			ano_atual: { $year: new Date() },
-			mes_conta: { $month: "$pagamento.data_pagamento_conta" },
-			ano_conta: { $year: "$pagamento.data_pagamento_conta" }
+			mes_conta: { $month: "$conta.pagamento.data_pagamento_conta" },
+			ano_conta: { $year: "$conta.pagamento.data_pagamento_conta" }
 		}
 	},
-	{
-		$match: {
-			$eq:["$ano_conta", "$ano_atual"]
-		}
-	},
+        {$project: {"conta.pagamento.tipo_pago": 1, "conta.pagamento.valor_pago": 1, mes_conta: 1, ab: {$cmp: ['$ano_conta','$ano_atual']}}},
+        {$match: {ab:{$eq:0}}},
 	{
 		$group:{
-			_id: {tipo_conta: "$tipo_conta", mes: "$mes_conta"}, 
-			total:{$sum: "$valor_pago"}
+			_id: {tipo_conta: "$conta.pagamento.tipo_conta", mes: "$mes_conta"}, 
+			total:{$sum: "$conta.pagamento.valor_pago"}
 		}
 	}
 ]);
 
 //8 Buscar percentual de contas que foram pagas em atraso nos √∫ltimos doze meses;
+
 
 //9 Qual o total pago em aditivos no √∫ltimo ano
 db.contrato.aggregate([
@@ -156,20 +188,17 @@ db.contrato.aggregate([
 	},
 	{
 		$project: {
-			valor_contrato_aditivo: 1,
+			"aditivo.valor_contrato_aditivo": 1,
 			ano_atual: { $year: new Date() },
-			ano_aditivo: { $year: "$data_renovacao" }
+			ano_aditivo: { $year: "$aditivo.data_renovacao" }
 		}
 	},
-	{
-		$match: {
-			$eq:["$ano_conta", "$ano_atual"]
-		}
-	},
+        {$project: {"aditivo.valor_contrato_aditivo": 1, ab: {$cmp: ['$ano_aditivo','$ano_atual']}}},
+        {$match: {ab:{$eq:0}}},
 	{
 		$group:{
-			_id: null, 
-			total:{$sum: "$valor_contrato_aditivo"}
+			_id: "$ab", 
+			total:{$sum: "$aditivo.valor_contrato_aditivo"}
 		}
 	}
 ]);
@@ -179,11 +208,25 @@ db.contrato.aggregate([
 db.contrato.aggregate([
     { $match: { conta: { "$elemMatch": { pagamento: { "$exists": false } } } } },
     { $project: {
+        _id_empresa: 1,
         conta: { $filter: { 
             input: "$conta", 
             as: "item", 
             cond: { $eq: [ { $type: "$$item.pagamento" }, "missing" ] }
         } },
 		telefone: 1
-    } }
+    }},
+    {
+        $lookup: {
+                from: "empresa",
+                localField: "_id_empresa",
+                foreignField: "_id",
+                as: "empresa"
+        }
+    },
+    {$unwind: "$empresa"},
+    {$project: {
+            "empresa.razao_social": 1
+     }}
+    
 ]);

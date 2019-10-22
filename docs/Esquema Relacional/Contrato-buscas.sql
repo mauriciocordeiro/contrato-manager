@@ -15,40 +15,46 @@ WHERE CONTR.status_contrato = 1
 GROUP BY tipo_conta
 
 -- 3 Buscar data de vencimento do contrato levando em consideração seus aditivos
-SELECT MAX(ADI.data_vencimento) AS data_vencimento_aditivo, CONTR.data_vencimento AS data_vencimento_contrato FROM contrato CONTR
+SELECT MAX(ADI.data_vencimento) AS data_vencimento_aditivo, CONTR.data_finalizacao as data_finalizacao_contrato FROM contrato CONTR
 LEFT OUTER JOIN aditivo ADI ON (CONTR.id_contrato = ADI.id_contrato
 									AND CONTR.id_empresa = ADI.id_empresa)
-WHERE id_contrato = ?
+WHERE CONTR.id_contrato = ?
+  AND CONTR.id_empresa = ?
 ORDER BY ADI.data_vencimento
 
 -- 4 Buscar todos os contratos que estão para vencer em até 30 dias
-SELECT * FROM contrato WHERE CONTR.data_vencimento + interval 30 day >= now()
+SELECT * FROM contrato CONTR WHERE (now() + interval 30 day) > CONTR.data_finalizacao
 
 -- 5 Buscar todas as contas que estão para vencer em até 7 dias;
-SELECT * FROM conta WHERE CON.data_vencimento + interval 7 day >= now()
+SELECT * FROM conta CON 
+WHERE (now() + interval 7 day) > CON.data_vencimento
+  AND NOT EXISTS (SELECT * FROM pagamento PAG WHERE CON.id_conta = PAG.id_conta AND CON.id_contrato = PAG.id_contrato AND CON.id_empresa = PAG.id_empresa )
+
 
 -- 6 Buscar média dos valores gastos/recebidos dos ultimos trinta dias;
 SELECT CON.tipo_conta, AVG(PAG.valor_pago)
 FROM pagamento PAG
-JOIN conta CON ON (PAG.id_conta = CON.id_conta)
-WHERE PAG.data_pagamento_conta >= now() - interval 30 day
+JOIN conta CON ON (PAG.id_conta = CON.id_conta AND CON.id_contrato = PAG.id_contrato AND CON.id_empresa = PAG.id_empresa)
+WHERE PAG.data_pagamento_conta >= (now() - interval 30 day)
 GROUP BY CON.tipo_conta
 
 -- 7 Buscar por mês (no último ano) quanto foi gasto e recebido;
-SELECT CON.tipo_conta, MONTH(PAG.data_pagamento_conta), SUM(PAG.valor_pago)
+SELECT MONTH(PAG.data_pagamento_conta), CON.tipo_conta, SUM(PAG.valor_pago)
 FROM pagamento PAG
-JOIN conta CON ON (PAG.id_conta = CON.id_conta)
+JOIN conta CON ON (PAG.id_conta = CON.id_conta AND CON.id_contrato = PAG.id_contrato AND CON.id_empresa = PAG.id_empresa)
 WHERE YEAR(PAG.data_pagamento_conta) = YEAR(now())
+GROUP BY MONTH(PAG.data_pagamento_conta), CON.tipo_conta
+ORDER BY MONTH(PAG.data_pagamento_conta), CON.tipo_conta
 
 -- 8 Buscar percentual de contas que foram pagas em atraso nos últimos doze meses;
 SELECT MONTH(PAG.data_pagamento_conta), ((COUNT(*) / (SELECT COUNT(*) FROM pagamento PAG_2 
-			JOIN CON_2 ON (PAG_2.id_conta = CON_2.id_conta) 
+			JOIN conta CON_2 ON (PAG_2.id_conta = CON_2.id_conta AND CON_2.id_contrato = PAG_2.id_contrato AND CON_2.id_empresa = PAG_2.id_empresa) 
 		  WHERE PAG_2.data_pagamento_conta >= now() - interval 365 day
-		  GROUP BY MONTH(PAG_2.data_pagamento_conta)))*100) AS PORCENTAGEM_CONTAS_ATRASO
+		   AND MONTH(PAG_2.data_pagamento_conta) = MONTH(PAG.data_pagamento_conta)))*100) AS PORCENTAGEM_CONTAS_ATRASO
 FROM pagamento PAG
-JOIN conta CON ON (PAG.id_conta = CON.id_conta)
-WHERE PAG.data_pagamento_conta >= now() - interval 365 day
-  AND PAG.taxa_juros > 0
+JOIN conta CON ON (PAG.id_conta = CON.id_conta AND CON.id_contrato = PAG.id_contrato AND CON.id_empresa = PAG.id_empresa)
+WHERE PAG.data_pagamento_conta >= (now() - interval 365 day)
+AND PAG.taxa_juros > 0
 GROUP BY MONTH(PAG.data_pagamento_conta)
 
 -- 9 Qual o total pago em aditivos no último ano
@@ -60,4 +66,4 @@ SELECT EMP.razao_social, (SELECT GROUP_CONCAT(TEL.numero SEPARATOR ', ')
   FROM telefone TEL
   WHERE TEL.id_empresa = CON.id_empresa) AS telefones  FROM conta CON
 JOIN empresa EMP ON (CON.id_empresa = EMP.id_empresa)
-WHERE NOT EXISTS (SELECT * FROM pagamento PAG WHERE CON.id_conta = PAG.id_conta)
+WHERE NOT EXISTS (SELECT * FROM pagamento PAG WHERE CON.id_conta = PAG.id_conta AND CON.id_contrato = PAG.id_contrato AND CON.id_empresa = PAG.id_empresa)

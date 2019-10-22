@@ -47,11 +47,11 @@ Contrato: {
 		valor_conta:decimal,
 		observacoes_conta:string,
 		_id_usuario: int,
-		pagamento:{
+		pagamento:[{
 			data_pagamento_conta:date,
 			valor_pago:decimal,
 			taxa_juros:decimal,
-		}
+		}]
 	}]
 }
 
