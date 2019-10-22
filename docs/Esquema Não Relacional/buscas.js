@@ -114,29 +114,30 @@ db.contrato.aggregate([
 	{ 
 		$unwind: "$conta"
 	},
-	{
+        { 
+		$unwind: "$conta.pagamento"
+	},
+        {
 		$project: {
-			tipo_pago: 1,
-			valor_pago: 1,
+			"conta.pagamento.tipo_conta": 1,
+			"conta.pagamento.valor_pago": 1,
 			ano_atual: { $year: new Date() },
-			mes_conta: { $month: "$pagamento.data_pagamento_conta" },
-			ano_conta: { $year: "$pagamento.data_pagamento_conta" }
+			mes_conta: { $month: "$conta.pagamento.data_pagamento_conta" },
+			ano_conta: { $year: "$conta.pagamento.data_pagamento_conta" }
 		}
 	},
-	{
-		$match: {
-			$eq:["$ano_conta", "$ano_atual"]
-		}
-	},
+        {$project: {"conta.pagamento.tipo_pago": 1, "conta.pagamento.valor_pago": 1, mes_conta: 1, ab: {$cmp: ['$ano_conta','$ano_atual']}}},
+        {$match: {ab:{$eq:0}}},
 	{
 		$group:{
-			_id: {tipo_conta: "$tipo_conta", mes: "$mes_conta"}, 
-			total:{$sum: "$valor_pago"}
+			_id: {tipo_conta: "$conta.pagamento.tipo_conta", mes: "$mes_conta"}, 
+			total:{$sum: "$conta.pagamento.valor_pago"}
 		}
 	}
 ]);
 
 //8 Buscar percentual de contas que foram pagas em atraso nos últimos doze meses;
+
 
 //9 Qual o total pago em aditivos no último ano
 db.contrato.aggregate([
@@ -145,20 +146,17 @@ db.contrato.aggregate([
 	},
 	{
 		$project: {
-			valor_contrato_aditivo: 1,
+			"aditivo.valor_contrato_aditivo": 1,
 			ano_atual: { $year: new Date() },
-			ano_aditivo: { $year: "$data_renovacao" }
+			ano_aditivo: { $year: "$aditivo.data_renovacao" }
 		}
 	},
-	{
-		$match: {
-			$eq:["$ano_conta", "$ano_atual"]
-		}
-	},
+        {$project: {"aditivo.valor_contrato_aditivo": 1, ab: {$cmp: ['$ano_aditivo','$ano_atual']}}},
+        {$match: {ab:{$eq:0}}},
 	{
 		$group:{
-			_id: null, 
-			total:{$sum: "$valor_contrato_aditivo"}
+			_id: "$ab", 
+			total:{$sum: "$aditivo.valor_contrato_aditivo"}
 		}
 	}
 ]);
@@ -168,11 +166,25 @@ db.contrato.aggregate([
 db.contrato.aggregate([
     { $match: { conta: { "$elemMatch": { pagamento: { "$exists": false } } } } },
     { $project: {
+        _id_empresa: 1,
         conta: { $filter: { 
             input: "$conta", 
             as: "item", 
             cond: { $eq: [ { $type: "$$item.pagamento" }, "missing" ] }
         } },
 		telefone: 1
-    } }
+    }},
+    {
+        $lookup: {
+                from: "empresa",
+                localField: "_id_empresa",
+                foreignField: "_id",
+                as: "empresa"
+        }
+    },
+    {$unwind: "$empresa"},
+    {$project: {
+            "empresa.razao_social": 1
+     }}
+    
 ]);
