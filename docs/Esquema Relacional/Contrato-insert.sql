@@ -35,20 +35,17 @@ INSERT INTO  Endereco  (id_endereco, rua, numero, bairro, cidade, uf, id_empresa
 INSERT INTO  Endereco  (id_endereco, rua, numero, bairro, cidade, uf, id_empresa) VALUES (11,'Brumado',2145,'Brasil','Vitoria da Conquista','BA',11);
 
 -- INSERÇÃO DE DADOS NA TABELA Telefone
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (1,1,'77','12345678');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (2,1,'77','11111111');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (3,2,'77','22222222');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (4,3,'73','26451259');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (5,4,'75','65217839');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (6,2,'74','56874512');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (7,5,'77','45657894');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (8,6,'71','88888888');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (9,7,'75','88888888');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (10,8,'77','99999999');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (11,9,'77','34257777');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (12,9,'77','91919191');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (13,10,'73','21012101');
-INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (14,11,'77','91234567');
+INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (1,1,'77','11111111');
+INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (2,2,'77','22222222');
+INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (3,3,'77','33333333');
+INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (4,4,'77','44444444');
+INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (5,5,'77','55555555');
+INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (6,6,'77','66666666');
+INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (7,7,'77','77777777');
+INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (8,8,'77','88888888');
+INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (9,9,'77','99999999');
+INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (10,10,'77','99009900');
+INSERT INTO  Telefone  (id_telefone, id_empresa, ddd, numero) VALUES (11,11,'77','88008800');
 
 -- INSERÇÃO DE DADOS NA TABELA Contrato
 INSERT INTO  Contrato  (id_contrato, id_empresa, copia_contrato, tipo_contrato, prestacao, status_contrato, valor_contrato, data_celebracao, data_finalizacao, observacoes, numero) VALUES (1,9,'C:\copia100.pdf',1,1,1,12357,'2016-11-02','2017-11-02',null,100);
@@ -85,13 +82,13 @@ INSERT INTO  Conta  (id_conta, id_contrato, id_empresa, id_usuario, copia_conta,
 INSERT INTO  Conta  (id_conta, id_contrato, id_empresa, id_usuario, copia_conta, tipo_conta, status_conta,  data_vencimento, data_recebimento_setor, data_envio_dof, valor_conta, observacoes) VALUES (1,1,3,2,'C:\copia200_01.pdf',1,1,'2019-06-11','2019-06-07','2019-06-07',760,null);
 INSERT INTO  Conta  (id_conta, id_contrato, id_empresa, id_usuario, copia_conta, tipo_conta, status_conta,  data_vencimento, data_recebimento_setor, data_envio_dof, valor_conta, observacoes) VALUES (2,1,3,1,'C:\copia200_02.pdf',1,2,'2019-07-11','2019-07-11','2019-07-11',760,null);
 INSERT INTO  Conta  (id_conta, id_contrato, id_empresa, id_usuario, copia_conta, tipo_conta, status_conta,  data_vencimento, data_recebimento_setor, data_envio_dof, valor_conta, observacoes) VALUES (3,1,1,2,'C:\copia300_03.pdf',2,1,'2019-07-06','2019-07-01','2019-07-04',11570,null);
-INSERT INTO  Conta  (id_conta, id_contrato, id_empresa, id_usuario, copia_conta, tipo_conta, status_conta,  data_vencimento, data_recebimento_setor, data_envio_dof, valor_conta, observacoes) VALUES (4,1,1,2,'C:\copia300_04.pdf',2,1,'2019-08-06','2019-08-02','2019-08-05',15321,null);
-INSERT INTO  Conta  (id_conta, id_contrato, id_empresa, id_usuario, copia_conta, tipo_conta, status_conta,  data_vencimento, data_recebimento_setor, data_envio_dof, valor_conta, observacoes) VALUES (5,1,1,1,'C:\copia300_05.pdf',2,2,'2019-09-06','2019-09-03','2019-09-03',15321,null);
+INSERT INTO  Conta  (id_conta, id_contrato, id_empresa, id_usuario, copia_conta, tipo_conta, status_conta,  data_vencimento, data_recebimento_setor, data_envio_dof, valor_conta, observacoes) VALUES (4,1,1,2,'C:\copia300_04.pdf',2,1,'2019-10-25','2019-10-21','2019-10-21',15321,null);
+INSERT INTO  Conta  (id_conta, id_contrato, id_empresa, id_usuario, copia_conta, tipo_conta, status_conta,  data_vencimento, data_recebimento_setor, data_envio_dof, valor_conta, observacoes) VALUES (5,1,1,1,'C:\copia300_05.pdf',2,2,'2019-10-26','2019-10-22','2019-10-22',15321,null);
 
 -- INSERÇÃO DE DADOS NA TABELA Pagamento
-INSERT INTO  Pagamento  (id_pagamento, id_conta, id_contrato, id_empresa, valor_pago, taxa_juros, data_pagamento_conta) VALUES (1,1,1,1,12987,null,'2019-05-04');
-INSERT INTO  Pagamento  (id_pagamento, id_conta, id_contrato, id_empresa, valor_pago, taxa_juros, data_pagamento_conta) VALUES (1,2,1,1,15321,null,'2019-06-06');
+INSERT INTO  Pagamento  (id_pagamento, id_conta, id_contrato, id_empresa, valor_pago, taxa_juros, data_pagamento_conta) VALUES (1,1,1,1,12987,null,'2019-09-25');
+INSERT INTO  Pagamento  (id_pagamento, id_conta, id_contrato, id_empresa, valor_pago, taxa_juros, data_pagamento_conta) VALUES (1,2,1,1,15321,null,'2019-09-25');
 INSERT INTO  Pagamento  (id_pagamento, id_conta, id_contrato, id_empresa, valor_pago, taxa_juros, data_pagamento_conta) VALUES (1,1,1,2,9343,null,'2019-05-08');
-INSERT INTO  Pagamento  (id_pagamento, id_conta, id_contrato, id_empresa, valor_pago, taxa_juros, data_pagamento_conta) VALUES (1,2,1,2,8743,null,'2019-06-10');
+INSERT INTO  Pagamento  (id_pagamento, id_conta, id_contrato, id_empresa, valor_pago, taxa_juros, data_pagamento_conta) VALUES (1,2,1,2,8917.86,2,'2019-06-10');
 INSERT INTO  Pagamento  (id_pagamento, id_conta, id_contrato, id_empresa, valor_pago, taxa_juros, data_pagamento_conta) VALUES (1,3,1,2,null,null,null);
 INSERT INTO  Pagamento  (id_pagamento, id_conta, id_contrato, id_empresa, valor_pago, taxa_juros, data_pagamento_conta) VALUES (1,1,1,3,760,null,'2019-06-09');
