@@ -1,5 +1,5 @@
 1 - Buscar todas os contratos de uma empresa;
-2 - Buscar debito e receita do mês levando em consideração todas as contas de contratos ativos, agrupando por contas pagae  e total
+2 - Buscar debito e receita do mês levando em consideração todas as contas de contratos ativos, agrupando por contas pagas e total
 3 - Buscar data de vencimento do contrato levando em consideração seus aditivos;
 4 - Buscar todos os contratos que estão para vencer em até 30 dias;
 5 - Buscar todas as contas que estão para vencer em até 7 dias;
