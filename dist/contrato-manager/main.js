@@ -925,7 +925,7 @@ var ContratoServices = /** @class */ (function () {
     function ContratoServices(http, snackBar) {
         this.http = http;
         this.snackBar = snackBar;
-        this.endpoint = 'http://localhost:4000/contrato';
+        this.endpoint = 'https://contrato-manager.herokuapp.com/contrato';
         this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('Content-Type', 'application/json');
     }
     ;
@@ -1073,7 +1073,7 @@ __webpack_require__.r(__webpack_exports__);
 var EmpresaServices = /** @class */ (function () {
     function EmpresaServices(http) {
         this.http = http;
-        this.endpoint = 'http://localhost:4000/empresa';
+        this.endpoint = 'https://contrato-manager.herokuapp.com/empresa';
         this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('Content-Type', 'application/json');
     }
     ;

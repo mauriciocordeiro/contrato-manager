@@ -6,7 +6,7 @@ import { Empresa } from './empresa';
 
 @Injectable({ providedIn: 'root' })
 export class EmpresaServices {
-    endpoint: String = 'http://localhost:4000/empresa';
+    endpoint: String = 'https://contrato-manager.herokuapp.com/empresa';
     headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     constructor(private http: HttpClient) { };

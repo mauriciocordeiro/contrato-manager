@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material';
 
 @Injectable({ providedIn: 'root' })
 export class ContratoServices {
-    endpoint: String = 'http://localhost:4000/contrato';
+    endpoint: String = 'https://contrato-manager.herokuapp.com/contrato';
     headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     constructor(
