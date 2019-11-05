@@ -28,11 +28,11 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'dist/contrato-manager')));
 app.use('/', express.static(path.join(__dirname, 'dist/contrato-manager')));
 // contrato -------------------------------------------------------------------
-const contratoRoute = require('../server/routes/contrato.route')
+const contratoRoute = require('./routes/contrato.route')
 app.use('/contrato', contratoRoute)
 // ----------------------------------------------------------------------------
 // empresa --------------------------------------------------------------------
-const empresaRoute = require('../server/routes/empresa.route')
+const empresaRoute = require('./routes/empresa.route')
 app.use('/empresa', empresaRoute)
 // ----------------------------------------------------------------------------
 // ============================================================================
