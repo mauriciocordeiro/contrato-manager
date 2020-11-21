@@ -1,25 +1,31 @@
-const express = require('express');
-const app = express();
-const empresaRoute = express.Router();
+const express = require('express')
+const mongoose = require('mongoose')
+// const app = express()
+const empresaRoute = express.Router()
 
 // Empresa model
-let Empresa = require('../model/Empresa');
+let Empresa = require('../model/Empresa')
 
 // Create Empresa
-empresaRoute.route('/create-empresa').post((req, res, next) => {
-    Empresa.create(req.body, (error, data) => {
+empresaRoute.route('/').post((req, res, next) => {
+    let empresa = req.body
+    empresa._id = new mongoose.Types.ObjectId()
+
+    Empresa.create(empresa, (error, data) => {
         if (error) {
+            console.log(error)
             return next(error)
         } else {
             res.json(data)
         }
     })
-});
+})
 
 // Get all empresa
 empresaRoute.route('/').get((req, res) => {
     Empresa.find((error, data) => {
         if (error) {
+            console.log(error)
             return next(error)
         } else {
             res.json(data)
@@ -28,7 +34,7 @@ empresaRoute.route('/').get((req, res) => {
 })
 
 // Get single empresa
-empresaRoute.route('/read-empresa/:id').get((req, res) => {
+empresaRoute.route('/:id').get((req, res) => {
     Empresa.findById(req.params.id, (error, data) => {
         if (error) {
             return next(error)
@@ -40,12 +46,12 @@ empresaRoute.route('/read-empresa/:id').get((req, res) => {
 
 
 // Update empresa
-empresaRoute.route('/update-empresa/:id').put((req, res, next) => {
-    Empresa.findByIdAndUpdate(req.params.id, {
+empresaRoute.route('/:id').put((req, res, next) => {
+    Empresa.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id), {
         $set: req.body
     }, (error, data) => {
         if (error) {
-            return next(error);
+            return next(error)
             console.log(error)
         } else {
             res.json(data)
@@ -55,10 +61,10 @@ empresaRoute.route('/update-empresa/:id').put((req, res, next) => {
 })
 
 // Delete empresa
-empresaRoute.route('/delete-empresa/:id').delete((req, res, next) => {
-    Empresa.findByIdAndRemove(req.params.id, (error, data) => {
+empresaRoute.route('/:id').delete((req, res, next) => {
+    Empresa.findByIdAndRemove(mongoose.Types.ObjectId(req.params.id), (error, data) => {
         if (error) {
-            return next(error);
+            return next(error)
         } else {
             res.status(200).json({
                 msg: data
@@ -67,4 +73,4 @@ empresaRoute.route('/delete-empresa/:id').delete((req, res, next) => {
     })
 })
 
-module.exports = empresaRoute;
+module.exports = empresaRoute

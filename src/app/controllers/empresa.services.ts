@@ -2,18 +2,20 @@ import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment as env } from 'src/environments/environment';
 import { Empresa } from './empresa';
+
 
 @Injectable({ providedIn: 'root' })
 export class EmpresaServices {
-    endpoint: String = 'https://contrato-manager.herokuapp.com/empresa';
+    endpoint: String = `${env.protocol}://${env.host}:${env.port}/empresas`; 
     headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     constructor(private http: HttpClient) { };
 
     // CREATE =================================================================
     create(data: Empresa): Observable<any> {
-        const url = `${this.endpoint}/create-empresa`;
+        const url = `${this.endpoint}/`;
         return this.http.post(url, data)
             .pipe(
                 catchError(this.errorHandler)
@@ -26,7 +28,7 @@ export class EmpresaServices {
     }
 
     read(id): Observable<any> {
-        const url = `${this.endpoint}/read-empresa/${id}`;
+        const url = `${this.endpoint}/${id}`;
         return this.http.get(url, { headers: this.headers })
             .pipe(
                 map((res: Response) => {
@@ -38,7 +40,7 @@ export class EmpresaServices {
 
     // UPDATE =================================================================
     update(id, data: Empresa): Observable<any> {
-        const url = `${this.endpoint}/update-empresa/${id}`;
+        const url = `${this.endpoint}/${id}`;
         return this.http.put(url, data, { headers: this.headers })
             .pipe(
                 catchError(this.errorHandler)
@@ -47,7 +49,7 @@ export class EmpresaServices {
 
     // DELETE =================================================================
     delete(id): Observable<any> {
-        const url = `${this.endpoint}/delete-empresa/${id}`;
+        const url = `${this.endpoint}/${id}`;
         return this.http.delete(url)
             .pipe(
                 catchError(this.errorHandler)
