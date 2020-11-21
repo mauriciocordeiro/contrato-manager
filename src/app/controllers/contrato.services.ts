@@ -4,10 +4,11 @@ import { throwError, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Contrato } from './contrato';
 import { MatSnackBar } from '@angular/material';
+import { environment as env } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ContratoServices {
-    endpoint: String = 'https://contrato-manager.herokuapp.com/contrato';
+    endpoint: String = `${env.protocol}://${env.host}:${env.port}/contratos`;
     headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     constructor(
@@ -17,7 +18,7 @@ export class ContratoServices {
 
     // CREATE =================================================================
     create(data: Contrato): Observable<any> {
-        const url = `${this.endpoint}/create-contrato`;
+        const url = `${this.endpoint}`;
         return this.http.post(url, data)
             .pipe(
                 catchError(this.errorHandler)
@@ -30,7 +31,7 @@ export class ContratoServices {
     }
 
     read(id): Observable<any> {
-        const url = `${this.endpoint}/read-contrato/${id}`;
+        const url = `${this.endpoint}/${id}`;
         return this.http.get(url, { headers: this.headers })
             .pipe(
                 map((res: Response) => {
@@ -41,7 +42,7 @@ export class ContratoServices {
     }
 
     getAll() {
-        const url = `${this.endpoint}/read-contrato-empresa/`;
+        const url = `${this.endpoint}/`;
         return this.http.get(url, { headers: this.headers })
             .pipe(
                 map((res: Response) => {
@@ -53,7 +54,7 @@ export class ContratoServices {
 
     // UPDATE =================================================================
     update(id, data: Contrato): Observable<any> {
-        const url = `${this.endpoint}/update-contrato/${id}`;
+        const url = `${this.endpoint}/${id}`;
         return this.http.put(url, data, { headers: this.headers })
             .pipe(
                 catchError(this.errorHandler)
@@ -62,7 +63,7 @@ export class ContratoServices {
 
     // DELETE =================================================================
     delete(id): Observable<any> {
-        const url = `${this.endpoint}/delete-contrato/${id}`;
+        const url = `${this.endpoint}/${id}`;
         return this.http.delete(url)
             .pipe(
                 catchError(this.errorHandler)

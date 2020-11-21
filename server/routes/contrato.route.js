@@ -1,56 +1,96 @@
-const express = require('express');
-const contratoRoute = express.Router();
+const express = require('express')
+const mongoose = require('mongoose')
+const contratoRoute = express.Router()
+
 // Contrato model
-let Contrato = require('../model/Contrato');
+let Contrato = require('../model/Contrato')
+
 // Create Contrato
-contratoRoute.route('/create-contrato').post((req, res, next) => {
-    Contrato.create(req.body, (error, data) => {
+contratoRoute.route('/').post((req, res, next) => {
+    let contrato = req.body
+    contrato._id = new mongoose.Types.ObjectId()
+    
+    Contrato.create(contrato, (error, data) => {
         if (error) {
             return next(error)
         } else {
             res.json(data)
         }
     })
-});
+})
+
 // Retrieve contrato
 contratoRoute.route('/').get((req, res) => {
-    Contrato.find((error, data) => {
-        if (error) {
-            return next(error)
-        } else {
-            res.json(data)
-        }
+    // Contrato.find((error, data) => {
+    //     if (error) {
+    //         return next(error)
+    //     } else {
+    //         res.json(data)
+    //     }
+    // })
+    Contrato.aggregate([
+        {
+            $lookup: {
+                from: "empresa",
+                localField: "_id_empresa",
+                foreignField: "_id",
+                as: "empresa"
+            }
+        },
+        { $unwind: "$empresa" }
+    ]).then(data => {
+        res.json(data)
     })
 })
+
 // Retrieve um contrato
-contratoRoute.route('/read-contrato/:id').get((req, res) => {
-    Contrato.findById(req.params.id, (error, data) => {
-        if (error) {
-            return next(error)
-        } else {
-            res.json(data)
-        }
+contratoRoute.route('/:id').get((req, res) => {
+    // Contrato.findById(req.params.id, (error, data) => {
+    //     if (error) {
+    //         return next(error)
+    //     } else {
+    //         res.json(data)
+    //     }
+    // })
+
+    Contrato.aggregate([
+        { 
+            $match: { "_id": mongoose.Types.ObjectId(req.params.id) } 
+        },  
+        {
+            $lookup: {
+                from: "empresa",
+                localField: "_id_empresa",
+                foreignField: "_id",
+                as: "empresa"
+            }
+        },
+        { $unwind: "$empresa" }
+    ]).then(data => {
+        res.json(data[0])
     })
 })
+
 // Update contrato
-contratoRoute.route('/update-contrato/:id').put((req, res, next) => {
-    Contrato.findByIdAndUpdate(req.params.id, {
+contratoRoute.route('/:id').put((req, res, next) => {
+    Contrato.findByIdAndUpdate(mongoose.Types.ObjectId(req.params.id), {
         $set: req.body
     }, (error, data) => {
         if (error) {
             console.log(error)
-            return next(error);
+            return next(error)
         } else {
             res.json(data)
             console.log('Contrato successfully updated!')
         }
     })
 })
+
 // Delete contrato
-contratoRoute.route('/delete-contrato/:id').delete((req, res, next) => {
-    Contrato.findByIdAndRemove(req.params.id, (error, data) => {
+contratoRoute.route('/:id').delete((req, res, next) => {
+    Contrato.findByIdAndRemove(mongoose.Types.ObjectId(req.params.id), (error, data) => {
         if (error) {
-            return next(error);
+            return next(error)
         } else {
             res.status(200).json({
                 msg: data
@@ -59,43 +99,4 @@ contratoRoute.route('/delete-contrato/:id').delete((req, res, next) => {
     })
 })
 
-// get contrato
-contratoRoute.route('/read-contrato-empresa').get((req, res) => {
-    Contrato.aggregate([
-        {
-            $lookup: {
-                from: "empresa",
-                localField: "_id_empresa",
-                foreignField: "_id",
-                as: "empresa"
-            }
-        },
-        { $unwind: "$empresa" }
-    ]).then(data => {
-        res.json(data);
-    });
-})
-
-// get um contrato
-contratoRoute.route('/read-contrato-empresa/:id').get((req, res) => {
-    Contrato.aggregate([
-        { 
-            $match: { "_id": Number(req.params.id) } 
-        }, 
-        {
-            $lookup: {
-                from: "empresa",
-                localField: "_id_empresa",
-                foreignField: "_id",
-                as: "empresa"
-            }
-        },
-        { $unwind: "$empresa" }
-    ]).then(data => {
-        res.json(data);
-    });
-})
-
-
-
-module.exports = contratoRoute;
+module.exports = contratoRoute

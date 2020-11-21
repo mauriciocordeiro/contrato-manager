@@ -1,0 +1,55 @@
+empresa: {
+	_id:ObjectId,
+	cnpj: string,
+	razao_social:string,
+	nome_fantasia:string,
+	email:string,
+	endereco:{
+		rua:string,
+		numero:int,
+		bairro:string,
+		cidade:string,
+		uf:string
+	},
+	telefones:[{
+		ddd:string,
+		telefone:string
+	}]
+}
+
+
+contrato: {
+	_id:ObjectId,
+	_id_empresa:ObjectId,
+	numero: string,
+	copia_contrato:string,
+	tipo_contrato:int,
+	prestacao:int,
+	status_contrato:int,
+	valor_contrato:decimal,
+	data_celebracao_contrato:date,
+	data_finalizacao_contrato:date,
+	observacoes_contrato:string,
+	aditivo:[{
+		copia_contrato_aditivo:string,
+		valor_contrato_aditivo:decimal,
+		data_renovacao:date,
+		data_vencimento:date,
+		observacoes:string
+	}],
+	conta: [{
+		copia_conta:string,
+		tipo_conta:int,
+		status_conta:int,
+		data_vencimento_conta:date,
+		data_recebimento_setor:date,
+		data_envio_dof:date,
+		valor_conta:decimal,
+		observacoes_conta:string,
+		pagamento:[{
+			data_pagamento_conta:date,
+			valor_pago:decimal,
+			taxa_juros:decimal,
+		}]
+	}]
+}
